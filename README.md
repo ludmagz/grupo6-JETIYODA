@@ -2,7 +2,7 @@
 
 Projeto IP:
 
-Jogo: Jetiyoda TestCase Ride
+Jogo: "Jetiyoda: TestCase Ride!!"
 
 Ideia: A gente planejou fazer uma paródia do jogo Jetpack Joyride sendo o nosso professor, Juliano Iyoda, o personagem principal. 
 
