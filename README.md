@@ -14,7 +14,7 @@ Dinâmica: Se o jogador bater em um laser, é game over. Caso ele complete o cam
 
 Sprites:
 
-![image](https://github.com/user-attachments/assets/fe32feb0-1b16-4235-a477-e00a0a1aceaa)
+![css_sprites](https://github.com/user-attachments/assets/270da0a7-2c05-473d-8355-27abf57170dd)
 
 
 
