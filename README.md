@@ -1,16 +1,19 @@
 # grupo6-JETIYODA
 
-Projeto IP:
+Projeto IP - Grupo 6 - EC 2024.1
 
-Jogo: "Jetiyoda: TestCase Ride!!"
+Jogo: "JetIyoda: TestCase Ride!!"
 
-Ideia: A gente planejou fazer uma paródia do jogo Jetpack Joyride sendo o nosso professor, Juliano Iyoda, o personagem principal. 
+A Ideia: O jogo será uma paródia de "Jetpack Joyride", sendo o nosso professor de IP, Juliano Iyoda, o personagem principal. 
 
-A história é a seguinte: O professor vai estar em casa descansando quando recebe a ligação de um aluno pedindo o testcase de uma questão da lista, então o prof terá que realizar sua jornada até o cin para tirar a dúvida do aluno. 
+A história: O professor está em casa, descansando, quando recebe a ligação de um aluno pedindo o testcase de uma questão da lista de programação. Então, visando a sanar a dúvida do aluno, Juliano terá que realizar sua jornada até o CIn. 
 
-Coletáveis: Durante o caminho o prof terá que desviar de lasers com seu jetpack (utilizando a tecla "espaço") e coletar 10 fragmentos de crachá para formar 1 crachá e poder entrar no cin.
+Os Coletáveis: Durante o caminho, o prof terá que desviar de lasers com seu jetpack (utilizando a tecla "espaço") e coletar X fragmentos de crachá, buscando formar 1 crachá completo e entrar no CIn.
 
-Dinâmica: Se o jogador bater em um laser, é game over. Caso ele complete o caminho mas não colete todos os fragmentos de crachá, também é game over, uma vez que ele não irá conseguir tirar a dúvida do aluno.
+A Dinâmica: 
+ - CASO 1: Jogador bate em um laser a caminho do CIn -> GAME OVER!
+ - CASO 2: Jogador chega ao CIn, mas não coleta fragmentos o suficiente para formar um crachá completo e entrar no CIn -> GAME OVER!
+ - CASO 3: Jogador chega ao CIn tendo coletado todos os fragmentos necessários e formado seu crachá completo -> VITÓRIA!
 
 Sprites:
 
