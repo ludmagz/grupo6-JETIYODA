@@ -42,6 +42,7 @@ fundo = pygame.image.load('Fundos/fundo1.png').convert()
 fundo = pygame.transform.scale(fundo, (largura, altura))
 
 fragmentos = []
+lasers= []
 
 def criar_fragmentos():
     y_fragmento = random.randint(50, altura - 50)
@@ -49,12 +50,19 @@ def criar_fragmentos():
         x_fragmento = largura + i * 40
         fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 30))
 criar_fragmentos()
-
+def criar_lasers():
+    y_lasers=random.randint(50, altura - 50)
+    for i in range(2):
+        x_lasers=largura
+        lasers.append(pygame.Rect(x_lasers, y_lasers, 100, 200))
+criar_lasers()
 while True:
     fps.tick(100)
     tela.fill((255, 255, 255))
     texto = f'Pontos: {pontos}'
+    texto2= 'GAME OVER'
     texto_formatado = fonte.render(texto, False, (255, 0, 0))
+    texto2_formatado=fonte.render(texto2, False, (255,0,0))
 
     tela.blit(fundo, (0, 0))
 
@@ -81,10 +89,10 @@ while True:
         if (y - 20) > 10:
             y -= 5
         else:
-            y = 10
+            y = 5
     else:
         if (y + 14) < 650:
-            y += 2.5
+            y += 10
         else:
             y = 420
 
@@ -119,8 +127,17 @@ while True:
             pontos += 1
         if fragmento.right < 0:
             fragmentos.remove(fragmento)
+    for laser in lasers[:]:
+        laser.x -= 5
+        pygame.draw.rect(tela, (0, 255, 0), laser)
+        if laser.colliderect(pygame.Rect(x, y, 104, 124)):
+            tela.blit(texto2_formatado,(500,500))
+        if laser.right < 0:
+            lasers.remove(laser)
 
     tela.blit(texto_formatado, (1050, 40))
     pygame.display.update()
     if len(fragmentos) <= 15:
         criar_fragmentos()
+    if len(lasers) <= 2:
+        criar_lasers()
