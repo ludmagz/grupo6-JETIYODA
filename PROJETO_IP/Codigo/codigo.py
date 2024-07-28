@@ -43,7 +43,7 @@ fragmentos_cracha2 = pygame.transform.scale(fragmentos_cracha, (30, 40))
 vidas_imagem=pygame.image.load('coletaveis/vidas.png').convert_alpha()
 vidas_imagem=pygame.transform.scale(vidas_imagem,(40,40))
 
-robocin=pygame.image.load('coletaveis/robocin_coletavel').convert_alpha()
+robocin=pygame.image.load('coletaveis/robocin_coletavel.png').convert_alpha()
 robocin=pygame.transform.scale(robocin,(30,30))
 
 x = 100
