@@ -10,7 +10,6 @@ altura = 720
 tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption('JetIyoda TestCase Ride!!')
 
-
 fonte = pygame.font.SysFont('arial', 40, True, True)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -33,6 +32,19 @@ fundo = pygame.transform.scale(fundo, (largura, altura))
 tela_inicial_fundo = pygame.image.load('tela inicial/telainicial.png').convert()
 tela_inicial_fundo = pygame.transform.scale(tela_inicial_fundo, (largura, altura))
 
+fragmentos_cracha = pygame.image.load('coletaveis/fragmento_cracha.png').convert_alpha()
+foguinho = pygame.image.load('coletaveis/foguinho_obstaculo.png').convert_alpha()
+fragmentos_cracha = pygame.transform.scale(fragmentos_cracha, (30, 40))
+foguinho = pygame.transform.scale(foguinho, (150, 100))
+
+fragmentos_cracha2 = pygame.image.load('coletaveis/fragmento_cracha.png').convert_alpha()
+fragmentos_cracha2 = pygame.transform.scale(fragmentos_cracha, (30, 40))
+
+vidas_imagem=pygame.image.load('coletaveis/vidas.png').convert_alpha()
+vidas_imagem=pygame.transform.scale(vidas_imagem,(40,40))
+
+robocin=pygame.image.load('coletaveis/robocin_coletavel').convert_alpha()
+robocin=pygame.transform.scale(robocin,(30,30))
 
 x = 100
 y = (altura / 2) - 40
@@ -40,6 +52,7 @@ gravidade = 0
 espaco = False
 game_over = False
 pontos = 0
+vidas = 3
 frames = 0
 index = 0
 
@@ -50,13 +63,13 @@ def criar_fragmentos():
     y_fragmento = random.randint(50, altura - 50)
     for i in range(5):
         x_fragmento = largura + i * 40
-        fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 30))
+        fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
 
 def criar_lasers():
     y_lasers = random.randint(50, altura - 50)
     for i in range(2):
         x_lasers = largura
-        lasers.append(pygame.Rect(x_lasers, y_lasers, 100, 200))
+        lasers.append(pygame.Rect(x_lasers, y_lasers, 150, 100))
 
 criar_fragmentos()
 criar_lasers()
@@ -66,7 +79,7 @@ def mostrar_tela_inicial():
     pygame.display.update()
 
 def game_loop():
-    global espaco, game_over, pontos, x, y, gravidade, frames, index
+    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas
     
     tela_inicial = True
     fps = pygame.time.Clock()
@@ -88,6 +101,7 @@ def game_loop():
                         y = (altura / 2) - 40
                         gravidade = 0
                         pontos = 0
+                        vidas = 3
                         fragmentos.clear()
                         lasers.clear()
                         criar_fragmentos()
@@ -95,12 +109,14 @@ def game_loop():
             continue
         
         tela.fill(WHITE)
-        texto = f'Pontos: {pontos}'
+        texto = f': {pontos}'
         texto2 = 'GAME OVER!'
         texto3 = 'aperte "R" para reiniciar'
+        texto4=f': {int(vidas)}'
         texto_formatado = fonte.render(texto, False, RED)
         texto2_formatado = fonte.render(texto2, False, RED)
         texto3_formatado = fonte.render(texto3, False, RED)
+        texto4_formatado=fonte.render(texto4, False, RED)
 
         tela.blit(fundo, (0, 0))
 
@@ -117,6 +133,7 @@ def game_loop():
                     y = (altura / 2) - 40
                     gravidade = 0
                     pontos = 0
+                    vidas = 3
                     fragmentos.clear()
                     lasers.clear()
                     criar_fragmentos()
@@ -169,7 +186,7 @@ def game_loop():
 
         for fragmento in fragmentos[:]:
             fragmento.x -= 5
-            pygame.draw.rect(tela, RED, fragmento)
+            tela.blit(fragmentos_cracha, fragmento.topleft)
             if fragmento.colliderect(pygame.Rect(x, y, 104, 124)):
                 fragmentos.remove(fragmento)
                 pontos += 1
@@ -178,13 +195,19 @@ def game_loop():
 
         for laser in lasers[:]:
             laser.x -= 5
-            pygame.draw.rect(tela, (0, 255, 0), laser)
+            tela.blit(foguinho, laser.topleft)
             if laser.colliderect(pygame.Rect(x, y, 104, 124)):
-                game_over = True
+                lasers.remove(laser)
+                vidas -= 0.5
+                if vidas == 0:
+                    game_over = True
             if laser.right < 0:
                 lasers.remove(laser)
 
-        tela.blit(texto_formatado, (1050, 40))
+        tela.blit(fragmentos_cracha2, (1050, 40))
+        tela.blit(texto_formatado, (1090, 40))
+        tela.blit(vidas_imagem,(30,45))
+        tela.blit(texto4_formatado, (80, 40))
         pygame.display.update()
 
         if len(fragmentos) <= 15:
