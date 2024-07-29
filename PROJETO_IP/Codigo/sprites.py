@@ -30,9 +30,9 @@ def inicializar_obstaculos():
 
     return obstaculos_sprites
 
-
 # Carrega e escala os sprites dos fundos
 def inicializar_fundos():
+
     largura = 1280
     altura = 720
     fundos = ['Fundos/fundo1.png', 'Fundos/fundo2.png', 'Fundos/fundo3.png', 'Fundos/fundo4.png', 'Fundos/fundo5.png']
@@ -58,6 +58,7 @@ def variaveis(fragmentos, lasers, altura, largura):
 
     x = 100
     y = (altura / 2) - 40
+    velocidade_tela = 1
     gravidade = 0
     pontos = 0
     vidas = 3
@@ -66,4 +67,4 @@ def variaveis(fragmentos, lasers, altura, largura):
     fragmentos = criar_fragmentos(altura, largura)
     lasers = criar_lasers(altura, largura)
 
-    return x, y, gravidade, pontos, vidas, fragmentos, lasers
+    return x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela
