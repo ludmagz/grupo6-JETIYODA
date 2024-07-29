@@ -27,6 +27,9 @@ fundos = inicializar_fundos()
 
 obstaculos_sprites = inicializar_obstaculos()
 
+
+# Declaração + formatação de cada sprite
+
 sprite_baixo1 = sprites['baixo1']
 sprite_baixo2 = sprites['baixo2']
 sprite_baixo3 = sprites['baixo3']
@@ -70,12 +73,14 @@ pontos = 0
 vidas = 3
 frames = 0
 index = 0
-
+existe_coracao = False
+tempo = pygame.time.get_ticks()
 
 # Inicialização dos obstáculos ================================
 
 fragmentos = criar_fragmentos(altura, largura)
 lasers = criar_lasers(altura, largura)
+coracao = criar_coracao(altura, largura)
 
 def mostrar_tela_inicial():
     tela.blit(tela_inicial_fundo, (0, 0))
@@ -85,7 +90,7 @@ def mostrar_tela_inicial():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas
+    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo
     
     tela_inicial = True
     fps = pygame.time.Clock()
@@ -156,6 +161,11 @@ def game_loop():
         fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos)
         lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas)
         
+        if existe_coracao == True:
+            coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas)
+        
+
+
         tela.blit(fragmentos_cracha2, (1050, 40))
         tela.blit(texto_formatado, (1090, 40))
         tela.blit(vidas_imagem,(30,45))
@@ -167,4 +177,11 @@ def game_loop():
         if len(lasers) <= 2:
             lasers = criar_lasers(altura, largura)
 
+        agora = pygame.time.get_ticks()
+
+        if (agora - tempo) >= 5000:
+            existe_coracao = True
+            tempo = pygame.time.get_ticks()
+            coracoes = criar_coracao(altura, largura)
+        
 game_loop()
