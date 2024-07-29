@@ -170,7 +170,7 @@ def game_loop():
         tela.blit(texto_formatado, (1090, 40))
         tela.blit(vidas_imagem,(30,45))
         tela.blit(texto4_formatado, (80, 40))
-        pygame.display.update()
+        pygame.display.flip()
 
         if len(fragmentos) <= 15:
             fragmentos = criar_fragmentos(altura, largura)
