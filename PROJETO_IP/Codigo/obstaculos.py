@@ -31,6 +31,7 @@ def criar_lasers(altura, largura):
     
     return lasers
 
+# Função que cria os corações (restauram vida do jogador)
 def criar_coracao(altura, largura):
 
     y_coracao = random.randint(50, altura - 50)
