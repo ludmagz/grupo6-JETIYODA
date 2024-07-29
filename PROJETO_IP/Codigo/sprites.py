@@ -68,6 +68,7 @@ def variaveis(fragmentos, lasers, altura, largura):
     x = 100
     y = (altura / 2) - 40
     velocidade_tela = 1
+    velocidade_objeto = 5
     gravidade = 0
     pontos = 0
     vidas = 3
@@ -76,4 +77,4 @@ def variaveis(fragmentos, lasers, altura, largura):
     fragmentos = criar_fragmentos(altura, largura)
     lasers = criar_lasers(altura, largura)
 
-    return x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela
+    return x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela, velocidade_objeto
