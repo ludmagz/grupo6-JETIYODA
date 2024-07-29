@@ -23,7 +23,7 @@ RED = (255, 0, 0)
 
 sprites = inicializa_sprites()
 
-fundos = inicializar_fundos()
+tela_inicial_fundo, backgrounds = inicializar_fundos()
 
 obstaculos_sprites = inicializar_obstaculos()
 
@@ -43,11 +43,6 @@ sprite_baixo3 = pygame.transform.scale(sprite_baixo3, (90, 140))
 sprite_voando = pygame.transform.scale(sprite_voando, (90, 140))
 sprite_voando2 = pygame.transform.scale(sprite_voando2, (90, 140))
 
-fundo1 = fundos['fundo1']
-tela_inicial_fundo = fundos['tela_inicial_fundo']
-
-fundo1 = pygame.transform.scale(fundo1, (largura, altura))
-tela_inicial_fundo = pygame.transform.scale(tela_inicial_fundo, (largura, altura))
 
 fragmentos_cracha = obstaculos_sprites['fragmentos_cracha']
 foguinho = obstaculos_sprites['foguinho']
@@ -75,6 +70,10 @@ frames = 0
 index = 0
 existe_coracao = False
 tempo = pygame.time.get_ticks()
+posicao_mapa = 0
+mapa = 0
+fundo = backgrounds[mapa]
+proximo_fundo = backgrounds[(mapa + 1)]
 
 # Inicialização dos obstáculos ================================
 
@@ -90,7 +89,7 @@ def mostrar_tela_inicial():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo
+    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo
     
     tela_inicial = True
     fps = pygame.time.Clock()
@@ -125,12 +124,30 @@ def game_loop():
         texto3 = 'aperte "R" para reiniciar'
         texto4=f': {int(vidas)}'
 
+        # Carregamento e progressão do mapa
+
+        if not game_over:
+            posicao_mapa -= 5
+            if posicao_mapa <= -largura:
+                posicao_mapa = 0
+                if mapa + 1 in range(len(backgrounds)):
+                    mapa += 1
+                    fundo = backgrounds[mapa]
+                    if mapa + 1 in range(len(backgrounds)):
+                        proximo_fundo = backgrounds[(mapa + 1)]
+                    else:
+                        mapa = 0
+                        proximo_fundo = backgrounds[(mapa + 1)]
+                    
+        
+        tela.blit(fundo, (posicao_mapa, 0))
+        tela.blit(proximo_fundo, (posicao_mapa + largura, 0))
+
+
         texto_formatado = fonte.render(texto, False, RED)
         texto2_formatado = fonte.render(texto2, False, RED)
         texto3_formatado = fonte.render(texto3, False, RED)
         texto4_formatado=fonte.render(texto4, False, RED)
-
-        tela.blit(fundo1, (0, 0))
 
         for evento in pygame.event.get():
 
