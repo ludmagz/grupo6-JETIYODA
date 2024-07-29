@@ -33,13 +33,24 @@ def inicializar_obstaculos():
 
 # Carrega e escala os sprites dos fundos
 def inicializar_fundos():
-
-    fundos = {}
-
-    fundos['fundo1'] = pygame.image.load('Fundos/fundo1.png').convert()
-    fundos['tela_inicial_fundo'] = pygame.image.load('tela inicial/telainicial.png').convert()
-
-    return fundos
+    largura = 1280
+    altura = 720
+    fundos = ['Fundos/fundo1.png', 'Fundos/fundo2.png', 'Fundos/fundo3.png', 'Fundos/fundo4.png', 'Fundos/fundo5.png']
+    backgrounds = []
+    for fundo in fundos:
+        bg = pygame.transform.scale(pygame.image.load(fundo).convert(), (largura, altura))
+        backgrounds.append(bg)
+    mapa = 0
+    if mapa in range (len(backgrounds)):
+        fundo = backgrounds[mapa]
+        proximo_fundo = backgrounds[mapa + 1]
+    else:
+        mapa = 0 
+        fundo = backgrounds[mapa]
+        proximo_fundo = backgrounds[mapa + 1]
+    tela_inicial_fundo = pygame.image.load('tela inicial/telainicial.png').convert()
+    tela_inicial_fundo = pygame.transform.scale(tela_inicial_fundo, (largura, altura))
+    return tela_inicial_fundo, backgrounds
 
 
 # Reinicia as variáveis quando preciso
