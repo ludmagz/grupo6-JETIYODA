@@ -50,7 +50,9 @@ def inicializar_fundos():
         proximo_fundo = backgrounds[mapa + 1]
     tela_inicial_fundo = pygame.image.load('tela inicial/telainicial.png').convert()
     tela_inicial_fundo = pygame.transform.scale(tela_inicial_fundo, (largura, altura))
-    return tela_inicial_fundo, backgrounds
+    tela_final1_fundo = pygame.image.load('telas finais/game over 1.png').convert()
+    tela_final1_fundo = pygame.transform.scale(tela_final1_fundo, (largura, altura))
+    return tela_inicial_fundo, backgrounds, tela_final1_fundo
 
 
 # Reinicia as variáveis quando preciso
