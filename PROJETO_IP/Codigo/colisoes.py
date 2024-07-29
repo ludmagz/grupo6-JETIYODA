@@ -32,6 +32,8 @@ def colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas):
     
     return lasers, game_over, vidas
 
+# Função de colisão com os corações (restayram vida do jogaodor)
+
 def colisao_coracao(coracoes, tela, x, y, vida_imagem, vidas):
      
     for coracao in coracoes[:]:
@@ -47,5 +49,3 @@ def colisao_coracao(coracoes, tela, x, y, vida_imagem, vidas):
             coracoes.remove(coracao)
     
     return coracoes, vidas
-    
-        
