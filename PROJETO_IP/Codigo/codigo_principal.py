@@ -43,6 +43,19 @@ sprite_baixo3 = pygame.transform.scale(sprite_baixo3, (90, 140))
 sprite_voando = pygame.transform.scale(sprite_voando, (90, 140))
 sprite_voando2 = pygame.transform.scale(sprite_voando2, (90, 140))
 
+sprite_baixo1_c = sprites['baixo1_c']
+sprite_baixo2_c = sprites['baixo2_c']
+sprite_baixo3_c = sprites['baixo3_c']
+sprite_voando_c = sprites['voando1_c']
+sprite_voando2_c = sprites['voando2_c']
+
+sprite_baixo1_c = pygame.transform.scale(sprite_baixo1_c, (90, 140))
+sprite_baixo2_c = pygame.transform.scale(sprite_baixo2_c, (90, 140))
+sprite_baixo3_c = pygame.transform.scale(sprite_baixo3_c, (90, 140))
+
+sprite_voando_c = pygame.transform.scale(sprite_voando_c, (90, 140))
+sprite_voando2_c = pygame.transform.scale(sprite_voando2_c, (90, 140))
+
 
 fragmentos_cracha = obstaculos_sprites['fragmentos_cracha']
 foguinho = obstaculos_sprites['foguinho']
@@ -170,7 +183,7 @@ def game_loop():
             continue  
         
         # Função para voar
-        y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index)
+        y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c)
 
         # Funções de colisões com os fragmentos de crachá e "lasers"
         fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos)
