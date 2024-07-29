@@ -75,6 +75,7 @@ robocin = pygame.transform.scale(robocin,(30,30))
 x = 100
 y = (altura / 2) - 40
 velocidade_tela = 1
+velocidade_objeto = 5
 gravidade = 0
 espaco = False
 game_over = False
@@ -103,7 +104,7 @@ def mostrar_tela_inicial():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela
+    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto
     
     tela_inicial = True
     fps = pygame.time.Clock()
@@ -127,7 +128,7 @@ def game_loop():
 
                         fragmentos = []
                         lasers = []
-                        x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela = variaveis(fragmentos, lasers, altura, largura)
+                        x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela, velocidade_objeto = variaveis(fragmentos, lasers, altura, largura)
             continue
         
         # Inicialização/ formatação dos textos que aparecem
@@ -143,6 +144,7 @@ def game_loop():
 
             if pygame.time.get_ticks() % 10000:
                 velocidade_tela += 0.001
+                velocidade_objeto += 0.002
 
             if posicao_mapa <= -largura:
                 posicao_mapa = 0
@@ -174,7 +176,7 @@ def game_loop():
                     espaco = True
                 elif evento.key == pygame.K_r and game_over:
                     game_over = False
-                    x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela = variaveis(fragmentos, lasers, altura, largura)
+                    x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela, velocidade_objeto = variaveis(fragmentos, lasers, altura, largura)
         
         # Tela de Game Over
         if game_over:
@@ -186,11 +188,11 @@ def game_loop():
         y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c)
 
         # Funções de colisões com os fragmentos de crachá e "lasers"
-        fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos)
-        lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas)
+        fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, velocidade_objeto)
+        lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto)
         
         if existe_coracao == True:
-            coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas)
+            coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas, velocidade_objeto)
         
         tela.blit(fragmentos_cracha2, (1050, 40))
         tela.blit(texto_formatado, (1090, 40))
