@@ -23,7 +23,7 @@ RED = (255, 0, 0)
 
 sprites = inicializa_sprites()
 
-tela_inicial_fundo, backgrounds = inicializar_fundos()
+tela_inicial_fundo, backgrounds, tela_final1_fundo = inicializar_fundos()
 
 obstaculos_sprites = inicializar_obstaculos()
 
@@ -121,9 +121,7 @@ def game_loop():
 
         tela.fill(WHITE)
         texto = f': {pontos}'
-        texto2 = 'GAME OVER!'
-        texto3 = 'aperte "R" para reiniciar'
-        texto4=f': {int(vidas)}'
+        texto1=f': {int(vidas)}'
 
         # Carregamento e progressão do mapa
 
@@ -149,9 +147,7 @@ def game_loop():
         tela.blit(proximo_fundo, (posicao_mapa + largura, 0))
 
         texto_formatado = fonte.render(texto, False, RED)
-        texto2_formatado = fonte.render(texto2, False, RED)
-        texto3_formatado = fonte.render(texto3, False, RED)
-        texto4_formatado=fonte.render(texto4, False, RED)
+        texto1_formatado=fonte.render(texto1, False, RED)
 
         for evento in pygame.event.get():
 
@@ -169,9 +165,8 @@ def game_loop():
         
         # Tela de Game Over
         if game_over:
-            tela.blit(texto2_formatado, (480, 250))
-            tela.blit(texto3_formatado, (380, 300))
-            pygame.display.update()
+            tela.blit(tela_final1_fundo, (0, 0))
+            pygame.display.flip()
             continue  
         
         # Função para voar
@@ -187,7 +182,7 @@ def game_loop():
         tela.blit(fragmentos_cracha2, (1050, 40))
         tela.blit(texto_formatado, (1090, 40))
         tela.blit(vidas_imagem,(30,45))
-        tela.blit(texto4_formatado, (80, 40))
+        tela.blit(texto1_formatado, (80, 40))
 
         pygame.display.flip()
 
