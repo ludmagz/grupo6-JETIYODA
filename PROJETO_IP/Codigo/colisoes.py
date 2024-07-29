@@ -2,10 +2,10 @@ import pygame
 
 # Função de colisão com os fragmentos de crachá, aumentandos os pontos
 
-def colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos):
+def colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, velocidade_objeto):
 
     for fragmento in fragmentos[:]:
-            fragmento.x -= 5
+            fragmento.x -= velocidade_objeto
             tela.blit(fragmentos_cracha, fragmento.topleft)
             if fragmento.colliderect(pygame.Rect(x, y, 104, 124)):
                 fragmentos.remove(fragmento)
@@ -17,10 +17,10 @@ def colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos):
 
 # Função de colisão com os "lasers" (tiram vida do jogador)
 
-def colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas):
+def colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto):
 
     for laser in lasers[:]:
-        laser.x -= 5
+        laser.x -= velocidade_objeto
         tela.blit(foguinho, laser.topleft)
         if laser.colliderect(pygame.Rect(x, y, 104, 124)):
             lasers.remove(laser)
@@ -34,10 +34,10 @@ def colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas):
 
 # Função de colisão com os corações (restayram vida do jogaodor)
 
-def colisao_coracao(coracoes, tela, x, y, vida_imagem, vidas):
+def colisao_coracao(coracoes, tela, x, y, vida_imagem, vidas, velocidade_objeto):
      
     for coracao in coracoes[:]:
-        coracao.x -= 5
+        coracao.x -= velocidade_objeto
         tela.blit(vida_imagem, coracao.topleft)
         if coracao.colliderect(pygame.Rect(x, y, 104, 124)):
             coracoes.remove(coracao)
