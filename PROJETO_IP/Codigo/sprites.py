@@ -8,11 +8,18 @@ def inicializa_sprites():
 
     sprites = {}
 
-    sprites['baixo1'] = pygame.transform.scale(pygame.image.load('sprites/frame2.png').convert_alpha(), (90, 140))
-    sprites['baixo2'] = pygame.transform.scale(pygame.image.load('sprites/frame3.png').convert_alpha(), (90, 140))
-    sprites['baixo3'] = pygame.transform.scale(pygame.image.load('sprites/frame1.png').convert_alpha(), (90, 140))
-    sprites['voando1'] = pygame.transform.scale(pygame.image.load('sprites/frame4.png').convert_alpha(), (90, 140))
-    sprites['voando2'] = pygame.transform.scale(pygame.image.load('sprites/frame5.png').convert_alpha(), (90, 140))
+    sprites['baixo1_c'] = pygame.transform.scale(pygame.image.load('sprites/frame2.png').convert_alpha(), (90, 140))
+    sprites['baixo2_c'] = pygame.transform.scale(pygame.image.load('sprites/frame1.png').convert_alpha(), (90, 140))
+    sprites['baixo3_c'] = pygame.transform.scale(pygame.image.load('sprites/frame3.png').convert_alpha(), (90, 140))
+    sprites['voando1_c'] = pygame.transform.scale(pygame.image.load('sprites/frame4.png').convert_alpha(), (90, 140))
+    sprites['voando2_c'] = pygame.transform.scale(pygame.image.load('sprites/frame5.png').convert_alpha(), (90, 140))
+    
+    
+    sprites['baixo1'] = pygame.transform.scale(pygame.image.load('sprites/frame8.png').convert_alpha(), (90, 140))
+    sprites['baixo2'] = pygame.transform.scale(pygame.image.load('sprites/frame6.png').convert_alpha(), (90, 140))
+    sprites['baixo3'] = pygame.transform.scale(pygame.image.load('sprites/frame7.png').convert_alpha(), (90, 140))
+    sprites['voando1'] = pygame.transform.scale(pygame.image.load('sprites/frame9.png').convert_alpha(), (90, 140))
+    sprites['voando2'] = pygame.transform.scale(pygame.image.load('sprites/frame10.png').convert_alpha(), (90, 140))
     
     return sprites
 
