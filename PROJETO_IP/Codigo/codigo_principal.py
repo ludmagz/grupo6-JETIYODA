@@ -61,6 +61,7 @@ robocin = pygame.transform.scale(robocin,(30,30))
 
 x = 100
 y = (altura / 2) - 40
+velocidade_tela = 1
 gravidade = 0
 espaco = False
 game_over = False
@@ -89,7 +90,7 @@ def mostrar_tela_inicial():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo
+    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela
     
     tela_inicial = True
     fps = pygame.time.Clock()
@@ -113,7 +114,7 @@ def game_loop():
 
                         fragmentos = []
                         lasers = []
-                        x, y, gravidade, pontos, vidas, fragmentos, lasers = variaveis(fragmentos, lasers, altura, largura)
+                        x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela = variaveis(fragmentos, lasers, altura, largura)
             continue
         
         # Inicialização/ formatação dos textos que aparecem
@@ -127,7 +128,11 @@ def game_loop():
         # Carregamento e progressão do mapa
 
         if not game_over:
-            posicao_mapa -= 5
+            posicao_mapa -= velocidade_tela
+
+            if pygame.time.get_ticks() % 10000:
+                velocidade_tela += 0.001
+
             if posicao_mapa <= -largura:
                 posicao_mapa = 0
                 if mapa + 1 in range(len(backgrounds)):
@@ -143,7 +148,6 @@ def game_loop():
         tela.blit(fundo, (posicao_mapa, 0))
         tela.blit(proximo_fundo, (posicao_mapa + largura, 0))
 
-
         texto_formatado = fonte.render(texto, False, RED)
         texto2_formatado = fonte.render(texto2, False, RED)
         texto3_formatado = fonte.render(texto3, False, RED)
@@ -156,13 +160,12 @@ def game_loop():
                 pygame.quit()
                 exit()
 
-            
             elif evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_SPACE and not game_over:
                     espaco = True
                 elif evento.key == pygame.K_r and game_over:
                     game_over = False
-                    x, y, gravidade, pontos, vidas, fragmentos, lasers = variaveis(fragmentos, lasers, altura, largura)
+                    x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela = variaveis(fragmentos, lasers, altura, largura)
         
         # Tela de Game Over
         if game_over:
@@ -181,12 +184,11 @@ def game_loop():
         if existe_coracao == True:
             coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas)
         
-
-
         tela.blit(fragmentos_cracha2, (1050, 40))
         tela.blit(texto_formatado, (1090, 40))
         tela.blit(vidas_imagem,(30,45))
         tela.blit(texto4_formatado, (80, 40))
+
         pygame.display.flip()
 
         if len(fragmentos) <= 15:
