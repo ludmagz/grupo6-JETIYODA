@@ -42,7 +42,7 @@ def inicializar_fundos():
 
     largura = 1280
     altura = 720
-    fundos = ['Fundos/fundo1.png', 'Fundos/fundo2.png', 'Fundos/fundo3.png', 'Fundos/fundo4.png', 'Fundos/fundo5.png', 'Fundos/fundo6.png']
+    fundos = ['Fundos/fundo1.png', 'Fundos/fundo2.png', 'Fundos/fundo3.png', 'Fundos/fundo4.png', 'Fundos/fundo5.png']
     backgrounds = []
     for fundo in fundos:
         bg = pygame.transform.scale(pygame.image.load(fundo).convert(), (largura, altura))
