@@ -30,7 +30,7 @@ def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3,
         y = altura - 140
 
     # Mudança de sprite do personagem de acordo com a ação dele
-    if pontos<50:
+    if pontos<350:
         if y >= 550:
                 if frames % 15 == 0:
                     index = (index + 1) % 3
