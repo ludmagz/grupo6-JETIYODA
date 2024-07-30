@@ -23,7 +23,7 @@ RED = (255, 0, 0)
 
 sprites = inicializa_sprites()
 
-tela_inicial_fundo, backgrounds, tela_final1_fundo = inicializar_fundos()
+tela_inicial_fundo, backgrounds, tela_final1_fundo, tela_final2_fundo,tela_final3_fundo = inicializar_fundos()
 
 obstaculos_sprites = inicializar_obstaculos()
 
@@ -90,7 +90,7 @@ mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
 tempo_inicial=pygame.time.get_ticks()
-tempo_total= 2*60*1000
+tempo_total= 1*60*1000
 
 # Inicialização dos obstáculos ================================
 
@@ -187,9 +187,18 @@ def game_loop():
             game_over=True
         # Tela de Game Over
         if game_over:
-            tela.blit(tela_final1_fundo, (0, 0))
-            pygame.display.flip()
-            continue  
+            if pontos>=350 and tempo_restante<=0:
+                tela.blit(tela_final3_fundo, (0, 0))
+                pygame.display.flip()
+                continue
+            elif pontos<350 and tempo_restante>0:  
+                tela.blit(tela_final1_fundo, (0, 0))
+                pygame.display.flip()
+                continue 
+            elif pontos<350 and tempo_restante<=0:  
+                tela.blit(tela_final2_fundo, (0, 0))
+                pygame.display.flip()
+                continue 
         
         # Função para voar
         y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c)
