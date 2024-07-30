@@ -89,6 +89,8 @@ posicao_mapa = 0
 mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
+tempo_inicial=pygame.time.get_ticks()
+tempo_total= 2*60*1000
 
 # Inicialização dos obstáculos ================================
 
@@ -111,6 +113,10 @@ def game_loop():
     
     while True:
         fps.tick(100)
+        tempo_atual=pygame.time.get_ticks()
+        tempo_corrido=tempo_atual - tempo_inicial
+        tempo_restante= tempo_total-tempo_corrido
+        
         
         if tela_inicial:
             mostrar_tela_inicial()
@@ -177,7 +183,8 @@ def game_loop():
                 elif evento.key == pygame.K_r and game_over:
                     game_over = False
                     x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela, velocidade_objeto = variaveis(fragmentos, lasers, altura, largura)
-        
+        if tempo_restante<=0:
+            game_over=True
         # Tela de Game Over
         if game_over:
             tela.blit(tela_final1_fundo, (0, 0))
