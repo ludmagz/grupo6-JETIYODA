@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from time import *
-from sprites import *
+from Sprites import *
 from voar import *
 from obstaculos import *
 from colisoes import *
@@ -187,13 +187,33 @@ def game_loop():
         # Função para voar
         y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c)
 
-        # Funções de colisões com os fragmentos de crachá e "lasers"
+        # Funções de movimentação e colisão com os fragmentos de crachá e "lasers"
+        for fragmento in fragmentos[:]:
+            fragmento.x -= velocidade_objeto
+            tela.blit(fragmentos_cracha, fragmento.topleft)
+            if fragmento.right < 0:
+                fragmentos.remove(fragmento)
         fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, velocidade_objeto)
+        
+        for laser in lasers[:]:
+            laser.x -= velocidade_objeto
+            tela.blit(foguinho, laser.topleft)
+            if laser.right < 0:
+                lasers.remove(laser)
         lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto)
         
         if existe_coracao == True:
+            for coracao in coracoes[:]:
+                coracao.x -= velocidade_objeto
+                tela.blit(vidas_imagem, coracao.topleft)
+                if coracao.right < 0:
+                    coracoes.remove(coracao)
             coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas, velocidade_objeto)
-        
+        if game_over:
+            lasers.clear()
+            fragmentos.clear()
+            coracoes.clear()
+            
         tela.blit(fragmentos_cracha2, (1050, 40))
         tela.blit(texto_formatado, (1090, 40))
         tela.blit(vidas_imagem,(30,45))
@@ -201,10 +221,84 @@ def game_loop():
 
         pygame.display.flip()
 
-        if len(fragmentos) <= 15:
-            fragmentos = criar_fragmentos(altura, largura)
+
+
+        #Excluindo as ordenadas que já possuem algum objeto problemático
+        if(fragmentos):
+            ultimo_frag = fragmentos[-1].bottomright
+        if(lasers):
+            ultimo_laser = lasers[-1].bottomright
+        if(len(lasers)>1):
+            penultimo_laser = lasers[-2].bottomright
+        if(existe_coracao):
+            if(coracoes):
+                ultimo_coracao = coracoes[-1].bottomright
+
+
+        if len(fragmentos) <= 10:
+            listinha_de_intervalos = []
+            if ultimo_frag[0]>largura-30:
+                for i in range(ultimo_frag[1]-43-40,ultimo_frag[1]+3):
+                    listinha_de_intervalos.append(i)
+            if ultimo_laser[0]>largura-10:
+                for i in range(ultimo_laser[1]-103-40,ultimo_laser[1]+3):
+                    listinha_de_intervalos.append(i)
+            if penultimo_laser[0]>largura-10:
+                for i in range(penultimo_laser[1]-103-40,penultimo_laser[1]+3):
+                    listinha_de_intervalos.append(i)
+            if(existe_coracao):
+                if ultimo_coracao[0]>largura-10:
+                    for i in range(ultimo_coracao[1]-43-40,ultimo_coracao[1]+3):   
+                        listinha_de_intervalos.append(i)
+
+
+            y_fragmento = random.randint(50, altura - 50)
+            while(y_fragmento in listinha_de_intervalos):
+                y_fragmento = random.randint(50, altura - 50)
+
+
+            for i in range(5):
+                
+                x_fragmento = largura + i * 40
+                fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
+
+
+
+        if(fragmentos):
+            ultimo_frag = fragmentos[-1].bottomright
+        if(lasers):
+            ultimo_laser = lasers[-1].bottomright
+        if(len(lasers)>1):
+            penultimo_laser = lasers[-2].bottomright
+        if(existe_coracao):
+            if(coracoes):
+                ultimo_coracao = coracoes[-1].bottomright
+
         if len(lasers) <= 2:
-            lasers = criar_lasers(altura, largura)
+            y_lasers = random.randint(50, altura - 50)
+            listinha_de_intervalos = []
+            if ultimo_frag[0]>largura-30:
+                for i in range(ultimo_frag[1]-43-100,ultimo_frag[1]+3):
+                    listinha_de_intervalos.append(i)
+            if ultimo_laser[0]>largura-10:
+                for i in range(ultimo_laser[1]-103-100,ultimo_laser[1]+3):
+                    listinha_de_intervalos.append(i)
+            if penultimo_laser[0]>largura-10:
+                for i in range(penultimo_laser[1]-103-100,penultimo_laser[1]+3):
+                    listinha_de_intervalos.append(i)
+            if(existe_coracao):
+                if ultimo_coracao[0]>largura-10:
+                    for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
+                        listinha_de_intervalos.append(i)
+
+            y_lasers = random.randint(50, altura - 50)
+            while(y_lasers in listinha_de_intervalos):
+                y_lasers = random.randint(50, altura - 50)
+
+            for i in range(2):
+
+                x_lasers = largura
+                lasers.append(pygame.Rect(x_lasers, y_lasers, 150, 100))
 
         agora = pygame.time.get_ticks()
 
