@@ -90,7 +90,7 @@ mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
 tempo_inicial=pygame.time.get_ticks()
-tempo_total= 2*60*1000
+tempo_total= 1*60*1000
 
 # Inicialização dos obstáculos ================================
 
