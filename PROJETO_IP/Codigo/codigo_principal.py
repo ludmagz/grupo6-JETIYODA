@@ -158,8 +158,8 @@ def game_loop():
         # Inicialização/ formatação dos textos que aparecem
         else:
             tela.fill(WHITE)
-            texto = f': {pontos}'
-            texto1=f': {int(vidas)}'
+            texto = f': {pontos}/350'
+            texto1=f': {int(vidas)}/3'
 
             # Carregamento e progressão do mapa
 
