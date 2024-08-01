@@ -130,11 +130,6 @@ def game_loop():
     
     while True:
         fps.tick(100)
-        tempo_atual=pygame.time.get_ticks()
-        tempo_corrido=tempo_atual - tempo_inicial
-        tempo_restante= tempo_total-tempo_corrido
-        
-        
         if tela_inicial:
             mostrar_tela_inicial()
             for evento in pygame.event.get():
@@ -174,6 +169,9 @@ def game_loop():
 
         # Inicialização/ formatação dos textos que aparecem
         else:
+            tempo_atual=pygame.time.get_ticks()
+            tempo_corrido=tempo_atual - tempo_inicial
+            tempo_restante= tempo_total-tempo_corrido
             tela.fill(WHITE)
             texto = f': {pontos}/350'
             texto1=f': {int(vidas)}/3'
