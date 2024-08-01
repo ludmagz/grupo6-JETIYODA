@@ -189,6 +189,7 @@ def game_loop():
             texto1_formatado=fonte.render(texto1, False, RED)
             if tempo_restante<=0:
                 game_over=True
+
             if game_over:
                 if pontos>=350 and tempo_restante<=0:
                     tela.blit(tela_final3_fundo, (0, 0))
@@ -201,6 +202,7 @@ def game_loop():
                 if pontos<350 and tempo_restante<=0:  
                     tela.blit(tela_final2_fundo, (0, 0))
                     pygame.display.flip()
+
             for evento in pygame.event.get():
 
                 # Sair do jogo fora da tela inicial
@@ -255,7 +257,7 @@ def game_loop():
                     tela.blit(foguinho, laser.topleft)
                     if laser.right < 0:
                         lasers.remove(laser)
-                lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto)
+                lasers, game_over, vidas, pontos = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, pontos)
                 
                 if existe_coracao == True:
                     for coracao in coracoes[:]:
