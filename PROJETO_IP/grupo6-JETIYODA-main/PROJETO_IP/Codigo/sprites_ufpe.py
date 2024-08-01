@@ -20,13 +20,6 @@ def inicializa_sprites():
     sprites['baixo3'] = pygame.transform.scale(pygame.image.load('sprites/frame7.png').convert_alpha(), (90, 140))
     sprites['voando1'] = pygame.transform.scale(pygame.image.load('sprites/frame9.png').convert_alpha(), (90, 140))
     sprites['voando2'] = pygame.transform.scale(pygame.image.load('sprites/frame10.png').convert_alpha(), (90, 140))
-
-    sprites['robocin1'] = pygame.transform.scale(pygame.image.load('sprites/robocin1.png').convert_alpha(), (90, 140))
-    sprites['robocin2'] = pygame.transform.scale(pygame.image.load('sprites/robocin2.png').convert_alpha(), (90, 140))
-    sprites['robocin3'] = pygame.transform.scale(pygame.image.load('sprites/robocin3.png').convert_alpha(), (90, 140))
-    sprites['robocin4'] = pygame.transform.scale(pygame.image.load('sprites/robocin4.png').convert_alpha(), (90, 140))
-    sprites['robocin5'] = pygame.transform.scale(pygame.image.load('sprites/robocin5.png').convert_alpha(), (90, 140))
-
     
     return sprites
 
@@ -47,6 +40,7 @@ def inicializar_obstaculos():
 # Carrega e escala os sprites dos fundos
 def inicializar_fundos():
 
+
     largura = 1280
     altura = 720
     fundos = ['Fundos/fundo1.png', 'Fundos/fundo2.png', 'Fundos/fundo3.png', 'Fundos/fundo4.png', 'Fundos/fundo5.png']
@@ -59,10 +53,22 @@ def inicializar_fundos():
         fundo = backgrounds[mapa]
         proximo_fundo = backgrounds[mapa + 1]
     else:
-        mapa = 0 
+        mapa = 0
         fundo = backgrounds[mapa]
         proximo_fundo = backgrounds[mapa + 1]
-        
+    fundos_ufpe = ['Fundos UFPE/ufpe1.png', 'Fundos UFPE/ufpeCAC.png','Fundos UFPE/ufpeCFCH.png', 'Fundos UFPE/ufpeCTG.png', 'Fundos UFPE/ufpeMATO.png', 'Fundos UFPE/ufpeCIN.png']
+    backgrounds_ufpe = []
+    for fundo in fundos_ufpe:
+        bg = pygame.transform.scale(pygame.image.load(fundo).convert(), (largura, altura))
+        backgrounds_ufpe.append(bg)
+    mapa = 0
+    if mapa in range (len(backgrounds_ufpe)):
+        fundo = backgrounds_ufpe[mapa]
+        proximo_fundo = backgrounds_ufpe[mapa + 1]
+    else:
+        mapa = 0
+        fundo = backgrounds_ufpe[mapa]
+        proximo_fundo = backgrounds_ufpe[mapa + 1]
     tela_inicial_fundo = pygame.image.load('tela inicial/telainicial.png').convert()
     tela_inicial_fundo = pygame.transform.scale(tela_inicial_fundo, (largura, altura))
     tela_final1_fundo = pygame.image.load('telas finais/game over 1.png').convert()
@@ -71,7 +77,7 @@ def inicializar_fundos():
     tela_final2_fundo = pygame.transform.scale(tela_final2_fundo, (largura, altura))
     tela_final3_fundo=pygame.image.load('telas finais/fundo_chegada.png').convert()
     tela_final3_fundo = pygame.transform.scale(tela_final3_fundo, (largura, altura))
-    return tela_inicial_fundo, backgrounds, tela_final1_fundo,tela_final2_fundo,tela_final3_fundo
+    return tela_inicial_fundo, backgrounds, tela_final1_fundo,tela_final2_fundo,tela_final3_fundo, backgrounds_ufpe
 
 
 # Reinicia as variáveis quando preciso

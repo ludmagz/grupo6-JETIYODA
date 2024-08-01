@@ -1,6 +1,6 @@
 import pygame
 
-def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c, infinito, sprite_robocin1, sprite_robocin2, sprite_robocin3, sprite_robocin4, sprite_robocin5):
+def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c):
 
     tecla = pygame.key.get_pressed()
 
@@ -31,45 +31,24 @@ def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3,
 
     # Mudança de sprite do personagem de acordo com a ação dele
     if pontos<350:
-
         if y >= 550:
-                
                 if frames % 15 == 0:
                     index = (index + 1) % 3
 
-                if index == 0 and infinito == False:
+                if index == 0:
                     tela.blit(sprite_baixo1, (x, 550))
-                elif index == 1 and infinito == False:
+                elif index == 1:
                     tela.blit(sprite_baixo2, (x, 550))
-                elif index == 2 and infinito == False:
+                elif index == 2:
                     tela.blit(sprite_baixo3, (x, 550))
-                
-                elif index == 0 and infinito == True:
-                    tela.blit(sprite_robocin1, (x, 550))
-                elif index == 1 and infinito == True:
-                    tela.blit(sprite_robocin2, (x, 550))
-                elif index == 2 and infinito == True:
-                    tela.blit(sprite_robocin3, (x, 550))
-
 
                 frames += 1
-
-        elif tecla[pygame.K_SPACE] and infinito == False:
+        elif tecla[pygame.K_SPACE] or espaco:
             tela.blit(sprite_voando, (x, y))
             frames = 0
-
-        
-        elif tecla[pygame.K_SPACE] and infinito == True:
-            tela.blit(sprite_robocin4, (x, y))
-            frames = 0
-
-
+            espaco = False
         else:
-            if infinito == False:
-                tela.blit(sprite_voando2, (x, y))
-        
-            else:
-                tela.blit(sprite_robocin5, (x, y))
+            tela.blit(sprite_voando2, (x, y))
     else:
         if y >= 550:
                 if frames % 15 == 0:

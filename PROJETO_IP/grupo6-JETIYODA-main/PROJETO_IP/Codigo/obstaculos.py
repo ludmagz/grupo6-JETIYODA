@@ -1,3 +1,4 @@
+
 import pygame
 import random
 
@@ -5,7 +6,6 @@ import random
 fragmentos = []
 lasers = []
 coracoes = []
-robocins = []
 
 # Função que cria os fragmentos de crachá (pontos)
 
@@ -46,13 +46,3 @@ def criar_coracao(altura, largura):
 
     
     return coracoes
-
-def criar_robocin(altura, largura):
-
-    y = random.randint(50, altura - 50)
-
-    x = largura
-
-    robocins.append(pygame.Rect(x, y, 40, 40))
-
-    return robocins

@@ -56,18 +56,6 @@ sprite_baixo3_c = pygame.transform.scale(sprite_baixo3_c, (90, 140))
 sprite_voando_c = pygame.transform.scale(sprite_voando_c, (90, 140))
 sprite_voando2_c = pygame.transform.scale(sprite_voando2_c, (90, 140))
 
-sprites_robocin1 = sprites['robocin1']
-sprites_robocin2 = sprites['robocin2']
-sprites_robocin3 = sprites['robocin3']
-sprites_robocin4 = sprites['robocin4']
-sprites_robocin5 = sprites['robocin5']
-
-sprites_robocin1 = pygame.transform.scale(sprites_robocin1, (90, 140))
-sprites_robocin2 = pygame.transform.scale(sprites_robocin2, (90, 140))
-sprites_robocin3 = pygame.transform.scale(sprites_robocin3, (90, 140))
-sprites_robocin4 = pygame.transform.scale(sprites_robocin4, (90, 140))
-sprites_robocin5 = pygame.transform.scale(sprites_robocin5, (90, 140))
-
 
 fragmentos_cracha = obstaculos_sprites['fragmentos_cracha']
 foguinho = obstaculos_sprites['foguinho']
@@ -96,9 +84,6 @@ vidas = 3
 frames = 0
 index = 0
 existe_coracao = False
-existe_robocin = False
-infinito = False
-tempo_robocin = pygame.time.get_ticks()
 tempo = pygame.time.get_ticks()
 posicao_mapa = 0
 mapa = 0
@@ -112,8 +97,6 @@ tempo_total= 1*60*1000
 fragmentos = criar_fragmentos(altura, largura)
 lasers = criar_lasers(altura, largura)
 coracao = criar_coracao(altura, largura)
-robocins = criar_robocin(altura, largura)
-
 
 def mostrar_tela_inicial():
     tela.blit(tela_inicial_fundo, (0, 0))
@@ -123,16 +106,14 @@ def mostrar_tela_inicial():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5
+    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial
     
     tela_inicial = True
     fps = pygame.time.Clock()
     
     while True:
         fps.tick(100)
-        tempo_atual=pygame.time.get_ticks()
-        tempo_corrido=tempo_atual - tempo_inicial
-        tempo_restante= tempo_total-tempo_corrido
+        
         
         
         if tela_inicial:
@@ -174,6 +155,9 @@ def game_loop():
 
         # Inicialização/ formatação dos textos que aparecem
         else:
+            tempo_atual=pygame.time.get_ticks()
+            tempo_corrido=tempo_atual - tempo_inicial
+            tempo_restante= tempo_total-tempo_corrido
             tela.fill(WHITE)
             texto = f': {pontos}/350'
             texto1=f': {int(vidas)}/3'
@@ -204,11 +188,11 @@ def game_loop():
 
             texto_formatado = fonte.render(texto, False, RED)
             texto1_formatado=fonte.render(texto1, False, RED)
-
             if tempo_restante<=0:
                 game_over=True
+
             if game_over:
-                if pontos>=350 and tempo_restante<=0:
+                if pontos>=100 and tempo_restante<=0 and vidas>0:
                     tela.blit(tela_final3_fundo, (0, 0))
                     pygame.display.flip()
                     
@@ -216,9 +200,10 @@ def game_loop():
                     tela.blit(tela_final1_fundo, (0, 0))
                     pygame.display.flip()
                     
-                if pontos<350 and tempo_restante<=0:  
+                if pontos<100 and tempo_restante<=0 and vidas>0:  
                     tela.blit(tela_final2_fundo, (0, 0))
                     pygame.display.flip()
+
             for evento in pygame.event.get():
 
                 # Sair do jogo fora da tela inicial
@@ -227,10 +212,8 @@ def game_loop():
                     exit()
 
                 elif evento.type == pygame.KEYDOWN:
-
                     if evento.key == pygame.K_SPACE and not game_over:
                         espaco = True
-
                     elif evento.key == pygame.K_r and game_over:
                         game_over = False
                         tempo_inicial +=tempo_corrido
@@ -245,33 +228,25 @@ def game_loop():
                         fragmentos = []
                         lasers = []
                         y_fragmento = (altura/2)-100
-
                         for i in range(5):
                             x_fragmento = largura + i * 40
                             fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
-
                         y_fragmento = (altura/2)-50
-
                         for i in range(5):
                             x_fragmento = largura + i * 40
                             fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
-
                         y_fragmento = (altura/2)
-
                         for i in range(5):
                             x_fragmento = largura + i * 40
                             fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
-
             # Tela de Game Over
             
             if not game_over:        
-
                 # Função para voar
-                y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c, infinito, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5)
+                y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c)
 
                 # Funções de movimentação e colisão com os fragmentos de crachá e "lasers"
                 for fragmento in fragmentos[:]:
-
                     fragmento.x -= velocidade_objeto
                     tela.blit(fragmentos_cracha, fragmento.topleft)
                     if fragmento.right < 0:
@@ -279,32 +254,19 @@ def game_loop():
                 fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, velocidade_objeto)
                 
                 for laser in lasers[:]:
-
                     laser.x -= velocidade_objeto
                     tela.blit(foguinho, laser.topleft)
                     if laser.right < 0:
                         lasers.remove(laser)
-                lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, infinito               )
+                lasers, game_over, vidas, pontos = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, pontos)
                 
                 if existe_coracao == True:
-
                     for coracao in coracoes[:]:
                         coracao.x -= velocidade_objeto
                         tela.blit(vidas_imagem, coracao.topleft)
                         if coracao.right < 0:
                             coracoes.remove(coracao)
                     coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas, velocidade_objeto)
-
-                if existe_robocin == True:
-                    
-                    for robo in robocins[:]:
-                        robo.x -= velocidade_objeto
-                        tela.blit(robocin, robo.topleft)
-                        if robo.right < 0:
-                            robocins.remove(robo)
-
-                    robocins, infinito, tempo_robocin = colisao_robocin(robocins, x, y, infinito, tempo_robocin)
-
                 if game_over:
                     lasers.clear()
                     fragmentos.clear()
@@ -390,7 +352,7 @@ def game_loop():
                         ultimo_coracao = coracoes[-1].bottomright
 
                 if len(lasers) <= 2:
-                    y_lasers = random.randint(50, altura - 50)
+
                     listinha_de_intervalos = []
                     if(fragmentos):
                         if ultimo_frag[0]>largura-30:
@@ -427,18 +389,21 @@ def game_loop():
                         lasers.append(pygame.Rect(x_lasers, y_lasers, 150, 100))
 
                 agora = pygame.time.get_ticks()
+                if(fragmentos):
+                    ultimo_frag = fragmentos[-1].bottomright
+                if(len(fragmentos)>5):
+                    ultimo_frag2 = fragmentos[-6].bottomright
+                if(len(fragmentos)>10):
+                    ultimo_frag3 = fragmentos[-11].bottomright
+                if(lasers):
+                    ultimo_laser = lasers[-1].bottomright
+                if(len(lasers)>1):
+                    penultimo_laser = lasers[-2].bottomright
+          
 
                 if (agora - tempo) >= 5000:
                     existe_coracao = True
-                    existe_robocin = True
                     tempo = pygame.time.get_ticks()
                     coracoes = criar_coracao(altura, largura)
-                    robocins = criar_robocin(altura, largura)
-                
-                if (agora - tempo_robocin) >= 5000:
-                    infinito = False
-                
-                
-                
         
 game_loop()

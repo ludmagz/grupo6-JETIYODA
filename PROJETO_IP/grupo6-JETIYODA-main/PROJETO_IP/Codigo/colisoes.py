@@ -13,16 +13,15 @@ def colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, veloci
 
 # Função de colisão com os "lasers" (tiram vida do jogador)
 
-def colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, infinito):
-    
+def colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, pontos):
     for laser in lasers[:]:
         if laser.colliderect(pygame.Rect(x, y, 104, 124)):
             lasers.remove(laser)
-            if infinito == False:
-                vidas -= 0.5
+            vidas -= 0.5
             if vidas == 0:
-                game_over = True 
-    return lasers, game_over, vidas
+                game_over = True
+                pontos = 0
+    return lasers, game_over, vidas, pontos
 
 # Função de colisão com os corações (restayram vida do jogaodor)
 
@@ -37,13 +36,3 @@ def colisao_coracao(coracoes, tela, x, y, vida_imagem, vidas, velocidade_objeto)
                 vidas = 3
     
     return coracoes, vidas
-
-def colisao_robocin(robocins, x, y, infinito, tempo_robocin):
-
-    for robo in robocins[:]:
-        if robo.colliderect(pygame.Rect(x, y, 104, 124)):
-            tempo_robocin = pygame.time.get_ticks()
-            infinito = True
-            robocins.remove(robo)
-    
-    return robocins, infinito, tempo_robocin
