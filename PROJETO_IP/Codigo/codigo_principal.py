@@ -113,9 +113,7 @@ def game_loop():
     
     while True:
         fps.tick(100)
-        tempo_atual=pygame.time.get_ticks()
-        tempo_corrido=tempo_atual - tempo_inicial
-        tempo_restante= tempo_total-tempo_corrido
+        
         
         
         if tela_inicial:
@@ -157,6 +155,9 @@ def game_loop():
 
         # Inicialização/ formatação dos textos que aparecem
         else:
+            tempo_atual=pygame.time.get_ticks()
+            tempo_corrido=tempo_atual - tempo_inicial
+            tempo_restante= tempo_total-tempo_corrido
             tela.fill(WHITE)
             texto = f': {pontos}/350'
             texto1=f': {int(vidas)}/3'
@@ -191,7 +192,7 @@ def game_loop():
                 game_over=True
 
             if game_over:
-                if pontos>=350 and tempo_restante<=0:
+                if pontos>=100 and tempo_restante<=0 and vidas>0:
                     tela.blit(tela_final3_fundo, (0, 0))
                     pygame.display.flip()
                     
@@ -199,7 +200,7 @@ def game_loop():
                     tela.blit(tela_final1_fundo, (0, 0))
                     pygame.display.flip()
                     
-                if pontos<350 and tempo_restante<=0:  
+                if pontos<100 and tempo_restante<=0 and vidas>0:  
                     tela.blit(tela_final2_fundo, (0, 0))
                     pygame.display.flip()
 
@@ -351,7 +352,7 @@ def game_loop():
                         ultimo_coracao = coracoes[-1].bottomright
 
                 if len(lasers) <= 2:
-                    y_lasers = random.randint(50, altura - 50)
+
                     listinha_de_intervalos = []
                     if(fragmentos):
                         if ultimo_frag[0]>largura-30:
@@ -388,6 +389,17 @@ def game_loop():
                         lasers.append(pygame.Rect(x_lasers, y_lasers, 150, 100))
 
                 agora = pygame.time.get_ticks()
+                if(fragmentos):
+                    ultimo_frag = fragmentos[-1].bottomright
+                if(len(fragmentos)>5):
+                    ultimo_frag2 = fragmentos[-6].bottomright
+                if(len(fragmentos)>10):
+                    ultimo_frag3 = fragmentos[-11].bottomright
+                if(lasers):
+                    ultimo_laser = lasers[-1].bottomright
+                if(len(lasers)>1):
+                    penultimo_laser = lasers[-2].bottomright
+          
 
                 if (agora - tempo) >= 5000:
                     existe_coracao = True
