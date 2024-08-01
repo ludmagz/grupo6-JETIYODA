@@ -206,7 +206,7 @@ def game_loop():
             if tempo_restante<=0:
                 game_over=True
             if game_over:
-                if pontos>=350 and tempo_restante<=0:
+                if pontos>=350 and tempo_restante<=0 and vidas>0:
                     tela.blit(tela_final3_fundo, (0, 0))
                     pygame.display.flip()
                     
@@ -214,7 +214,7 @@ def game_loop():
                     tela.blit(tela_final1_fundo, (0, 0))
                     pygame.display.flip()
                     
-                if pontos<350 and tempo_restante<=0:  
+                if pontos<350 and tempo_restante<=0 and vidas<=0:  
                     tela.blit(tela_final2_fundo, (0, 0))
                     pygame.display.flip()
             for evento in pygame.event.get():
