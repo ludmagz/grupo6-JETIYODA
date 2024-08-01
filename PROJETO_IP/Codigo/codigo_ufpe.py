@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from time import *
-from Sprites import *
+from sprites_ufpe import *
 from voar import *
 from obstaculos import *
 from colisoes import *
