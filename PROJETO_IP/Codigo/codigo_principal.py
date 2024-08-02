@@ -99,6 +99,7 @@ existe_coracao = False
 existe_robocin = False
 infinito = False
 tempo_robocin = pygame.time.get_ticks()
+tempo_rob = pygame.time.get_ticks() 
 tempo = pygame.time.get_ticks()
 posicao_mapa = 0
 mapa = 0
@@ -126,7 +127,7 @@ def mostrar_tela_informacoes():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5
+    global tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5
     
     tela_inicial = True
     tela_info = False
@@ -441,9 +442,12 @@ def game_loop():
 
                 if (agora - tempo) >= 5000:
                     existe_coracao = True
-                    existe_robocin = True
                     tempo = pygame.time.get_ticks()
                     coracoes = criar_coracao(altura, largura)
+
+                if (agora - tempo_rob) >= 20000:
+                    existe_robocin = True
+                    tempo_rob = pygame.time.get_ticks()
                     robocins = criar_robocin(altura, largura)
                 
                 if (agora - tempo_robocin) >= 5000:
