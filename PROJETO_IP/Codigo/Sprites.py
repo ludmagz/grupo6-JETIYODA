@@ -65,13 +65,20 @@ def inicializar_fundos():
         
     tela_inicial_fundo = pygame.image.load('tela inicial/telainicial.png').convert()
     tela_inicial_fundo = pygame.transform.scale(tela_inicial_fundo, (largura, altura))
+
+    tela_instrucoes_fundo = pygame.image.load('tela inicial/instrucoes.png').convert()
+    tela_instrucoes_fundo = pygame.transform.scale(tela_instrucoes_fundo, (largura, altura))
+
     tela_final1_fundo = pygame.image.load('telas finais/game over 1.png').convert()
     tela_final1_fundo = pygame.transform.scale(tela_final1_fundo, (largura, altura))
+
     tela_final2_fundo=pygame.image.load('telas finais/game over 2.png').convert()
     tela_final2_fundo = pygame.transform.scale(tela_final2_fundo, (largura, altura))
+
     tela_final3_fundo=pygame.image.load('telas finais/fundo_chegada.png').convert()
     tela_final3_fundo = pygame.transform.scale(tela_final3_fundo, (largura, altura))
-    return tela_inicial_fundo, backgrounds, tela_final1_fundo,tela_final2_fundo,tela_final3_fundo
+
+    return tela_inicial_fundo, tela_instrucoes_fundo, backgrounds, tela_final1_fundo, tela_final2_fundo,tela_final3_fundo
 
 
 # Reinicia as variáveis quando preciso
