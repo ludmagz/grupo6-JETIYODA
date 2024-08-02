@@ -23,7 +23,7 @@ RED = (255, 0, 0)
 
 sprites = inicializa_sprites()
 
-tela_inicial_fundo, backgrounds, tela_final1_fundo, tela_final2_fundo,tela_final3_fundo = inicializar_fundos()
+tela_inicial_fundo, tela_instrucoes_fundo, backgrounds, tela_final1_fundo, tela_final2_fundo,tela_final3_fundo = inicializar_fundos()
 
 obstaculos_sprites = inicializar_obstaculos()
 
@@ -119,6 +119,9 @@ def mostrar_tela_inicial():
     tela.blit(tela_inicial_fundo, (0, 0))
     pygame.display.update()
 
+def mostrar_tela_informacoes():
+    tela.blit(tela_instrucoes_fundo, (0, 0))
+    pygame.display.flip()
 
 # Loop principal do jogo ======================================
 
@@ -126,12 +129,15 @@ def game_loop():
     global espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5
     
     tela_inicial = True
+    tela_info = False
     fps = pygame.time.Clock()
     
     while True:
         fps.tick(100)
         if tela_inicial:
-            mostrar_tela_inicial()
+            if tela_info == False:
+                mostrar_tela_inicial()
+
             for evento in pygame.event.get():
 
                 # Sair do jogo ainda na tela inicial
@@ -141,7 +147,8 @@ def game_loop():
 
                 # Sair da tela inicial
                 elif evento.type == pygame.KEYDOWN:
-                    if evento.key == pygame.K_s:
+
+                    if evento.key == pygame.K_s and tela_info == False:
                         tela_inicial = False
                         x = 100
                         y = (altura / 2) - 40
@@ -164,9 +171,15 @@ def game_loop():
                         for i in range(5):
                             x_fragmento = largura + i * 40
                             fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
-                        
+                    
+                    if evento.key == pygame.K_i:
+                        tela_info = True
+                        mostrar_tela_informacoes()
+                    
+                    if evento.key == pygame.K_m and tela_info:
+                        tela_info = False
 
-
+                    
         # Inicialização/ formatação dos textos que aparecem
         else:
             tempo_atual=pygame.time.get_ticks()
