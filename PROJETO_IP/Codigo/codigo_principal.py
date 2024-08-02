@@ -92,6 +92,8 @@ fogo_som=pygame.mixer.Sound('musicas/fogo_som.wav')
 
 # Variáveis iniciais =========================================
 
+tamanho_inicial = [200, 150]  # Largura e altura (largura, altura)
+tamanho_atual = tamanho_inicial.copy()  # Começa com o tamanho inicial
 x = 100
 y = (altura / 2) - 40
 velocidade_tela = 1
@@ -106,6 +108,7 @@ index = 0
 existe_coracao = False
 existe_robocin = False
 infinito = False
+primeiro_robocin = True
 tempo_robocin = pygame.time.get_ticks()
 tempo_rob = pygame.time.get_ticks() 
 tempo = pygame.time.get_ticks()
@@ -135,7 +138,7 @@ def mostrar_tela_informacoes():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som
+    global tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som, primeiro_robocin
     
     tela_inicial = True
     tela_info = False
@@ -285,9 +288,16 @@ def game_loop():
             # Tela de Game Over
             
             if not game_over:        
-
+                
                 # Função para voar
                 y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c, infinito, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5)
+
+                if infinito == True:
+                    tempo_passado = pygame.time.get_ticks() - tempo_robocin
+                    atualizar_tamanho(tamanho_atual, tempo_passado)
+                    
+                if infinito and tamanho_atual[0] > 0:
+                    pygame.draw.rect(tela, (0, 250, 0), (1050, 100, tamanho_atual[0], 40))
 
                 # Funções de movimentação e colisão com os fragmentos de crachá e "lasers"
                 for fragmento in fragmentos[:]:
@@ -329,6 +339,8 @@ def game_loop():
                     lasers.clear()
                     fragmentos.clear()
                     coracoes = []
+                    robocins = []
+                    
             
                 tela.blit(fragmentos_cracha2, (1050, 40))
                 tela.blit(texto_formatado, (1090, 40))
@@ -456,12 +468,12 @@ def game_loop():
                 if (agora - tempo_rob) >= 20000:
                     existe_robocin = True
                     tempo_rob = pygame.time.get_ticks()
-                    robocins = criar_robocin(altura, largura)
+                    if primeiro_robocin == False:
+                        robocins = criar_robocin(altura, largura)
+                    primeiro_robocin = False
                 
                 if (agora - tempo_robocin) >= 5000:
                     infinito = False
-                
-                
                 
         
 game_loop()
