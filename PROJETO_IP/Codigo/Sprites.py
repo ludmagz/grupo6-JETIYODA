@@ -91,7 +91,7 @@ def inicializar_fundos():
     tela_final3_fundo=pygame.image.load('telas finais/fundo_chegada.png').convert()
     tela_final3_fundo = pygame.transform.scale(tela_final3_fundo, (largura, altura))
 
-    return tela_inicial_fundo, tela_instrucoes_fundo, backgrounds, tela_final1_fundo, tela_final2_fundo,tela_final3_fundo, backgrounds_ufpe
+    return tela_inicial_fundo, tela_instrucoes_fundo, backgrounds, tela_final1_fundo, tela_final2_fundo, tela_final3_fundo, backgrounds_ufpe
 
 
 # Reinicia as variáveis quando preciso
