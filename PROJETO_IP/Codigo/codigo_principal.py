@@ -81,6 +81,14 @@ fragmentos_cracha2 = pygame.transform.scale(fragmentos_cracha, (30, 40))
 vidas_imagem = pygame.transform.scale(vidas_imagem,(40,40))
 robocin = pygame.transform.scale(robocin,(40,40))
 
+musica_fundo=pygame.mixer.music.load('musicas/musica_fundo.mp3')
+pygame.mixer.music.play(-1)
+
+coleta_cracha=pygame.mixer.Sound('musicas/coleta_cracha.wav')
+robocin_coletado=pygame.mixer.Sound('musicas/robocin_coletado.wav')
+vida_som=pygame.mixer.Sound('musicas/vida_som.wav')
+fogo_som=pygame.mixer.Sound('musicas/fogo_som.wav')
+
 
 # Variáveis iniciais =========================================
 
@@ -127,7 +135,7 @@ def mostrar_tela_informacoes():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5
+    global tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som
     
     tela_inicial = True
     tela_info = False
@@ -288,7 +296,7 @@ def game_loop():
                     tela.blit(fragmentos_cracha, fragmento.topleft)
                     if fragmento.right < 0:
                         fragmentos.remove(fragmento)
-                fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, velocidade_objeto)
+                fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, velocidade_objeto,coleta_cracha)
                 
                 for laser in lasers[:]:
 
@@ -296,7 +304,7 @@ def game_loop():
                     tela.blit(foguinho, laser.topleft)
                     if laser.right < 0:
                         lasers.remove(laser)
-                lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, infinito               )
+                lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, infinito, fogo_som)
                 
                 if existe_coracao == True:
 
@@ -305,7 +313,7 @@ def game_loop():
                         tela.blit(vidas_imagem, coracao.topleft)
                         if coracao.right < 0:
                             coracoes.remove(coracao)
-                    coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas, velocidade_objeto)
+                    coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas, velocidade_objeto,vida_som)
 
                 if existe_robocin == True:
                     
@@ -315,7 +323,7 @@ def game_loop():
                         if robo.right < 0:
                             robocins.remove(robo)
 
-                    robocins, infinito, tempo_robocin = colisao_robocin(robocins, x, y, infinito, tempo_robocin)
+                    robocins, infinito, tempo_robocin = colisao_robocin(robocins, x, y, infinito, tempo_robocin,robocin_coletado)
 
                 if game_over:
                     lasers.clear()
