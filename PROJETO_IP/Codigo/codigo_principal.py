@@ -62,11 +62,11 @@ sprites_robocin3 = sprites['robocin3']
 sprites_robocin4 = sprites['robocin4']
 sprites_robocin5 = sprites['robocin5']
 
-sprites_robocin1 = pygame.transform.scale(sprites_robocin1, (90, 140))
-sprites_robocin2 = pygame.transform.scale(sprites_robocin2, (90, 140))
-sprites_robocin3 = pygame.transform.scale(sprites_robocin3, (90, 140))
-sprites_robocin4 = pygame.transform.scale(sprites_robocin4, (90, 140))
-sprites_robocin5 = pygame.transform.scale(sprites_robocin5, (90, 140))
+sprites_robocin1 = pygame.transform.scale(sprites_robocin1, (100, 140))
+sprites_robocin2 = pygame.transform.scale(sprites_robocin2, (100, 140))
+sprites_robocin3 = pygame.transform.scale(sprites_robocin3, (100, 140))
+sprites_robocin4 = pygame.transform.scale(sprites_robocin4, (100, 140))
+sprites_robocin5 = pygame.transform.scale(sprites_robocin5, (100, 140))
 
 
 fragmentos_cracha = obstaculos_sprites['fragmentos_cracha']
@@ -79,7 +79,7 @@ fragmentos_cracha = pygame.transform.scale(fragmentos_cracha, (30, 40))
 foguinho = pygame.transform.scale(foguinho, (150, 100))
 fragmentos_cracha2 = pygame.transform.scale(fragmentos_cracha, (30, 40))
 vidas_imagem = pygame.transform.scale(vidas_imagem,(40,40))
-robocin = pygame.transform.scale(robocin,(30,30))
+robocin = pygame.transform.scale(robocin,(40,40))
 
 
 # Variáveis iniciais =========================================
