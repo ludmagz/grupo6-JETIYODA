@@ -112,12 +112,17 @@ primeiro_robocin = True
 tempo_robocin = pygame.time.get_ticks()
 tempo_rob = pygame.time.get_ticks() 
 tempo = pygame.time.get_ticks()
+x_load = 720
+xx_load = 270
+tempo_barra = pygame.time.get_ticks()
+contorno = pygame.Rect(265, 15, 730, 20)  
+barra_loading = pygame.Rect(xx_load, 20, x_load, 10)
 posicao_mapa = 0
 mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
 tempo_inicial=pygame.time.get_ticks()
-tempo_total= 1*76*1000
+tempo_total= 1*74*1000
 na_ufpe = False
 check = 0
 fundo_restart = backgrounds[:]
@@ -142,7 +147,7 @@ def mostrar_tela_informacoes():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som, primeiro_robocin, na_ufpe, check, backgrounds, backgrounds_ufpe, ganhou
+    global tempo_barra, barra_loading, x_load, xx_load, tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som, primeiro_robocin, na_ufpe, check, backgrounds, backgrounds_ufpe, ganhou
     
     tela_inicial = True
     tela_info = False
@@ -357,11 +362,24 @@ def game_loop():
 
                     robocins, infinito, tempo_robocin = colisao_robocin(robocins, x, y, infinito, tempo_robocin,robocin_coletado)
 
+                pygame.draw.rect(tela, BLACK, contorno)
+                pygame.draw.rect(tela, WHITE, barra_loading)
+                barra_time_now = pygame.time.get_ticks() 
+                
+                if (barra_time_now - tempo_barra) >= 1500:
+                    tempo_barra = pygame.time.get_ticks() 
+                    x_load -= 12
+                    xx_load += 12
+                    barra_loading = pygame.Rect(xx_load, 20, x_load, 10)
+
                 if game_over:
                     lasers.clear()
                     fragmentos.clear()
                     coracoes = []
                     robocins = []
+                    x_load = 720
+                    xx_load = 270
+                    barra_loading = pygame.Rect(xx_load, 20, x_load, 10) 
                     
             
                 tela.blit(fragmentos_cracha2, (1050, 40))
