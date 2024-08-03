@@ -122,7 +122,7 @@ mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
 tempo_inicial=pygame.time.get_ticks()
-tempo_total= 1*71*1000
+tempo_total= 1*72*1000
 na_ufpe = False
 check = 0
 fundo_restart = backgrounds[:]
@@ -245,16 +245,15 @@ def game_loop():
                     tela.blit(tela_final3_fundo, (0, 0))
                     pygame.display.flip()
                     ganhou = True
-                
-                elif pontos<350  and vidas<=0:  
-                    tela.blit(tela_final1_fundo, (0, 0))
-                    pygame.display.flip()
- 
-                else:  
+
+                elif pontos<350 and (tempo_corrido >= tempo_total) and vidas>0:  
                     tela.blit(tela_final2_fundo, (0, 0))
                     pygame.display.flip()
-                    
                 
+                elif vidas<=0 and tempo_corrido < tempo_total:  
+                    tela.blit(tela_final1_fundo, (0, 0))
+                    pygame.display.flip()
+              
             for evento in pygame.event.get():
 
                 # Sair do jogo fora da tela inicial
@@ -373,8 +372,8 @@ def game_loop():
                 
                 if (barra_time_now - tempo_barra) >= 1500:
                     tempo_barra = pygame.time.get_ticks() 
-                    x_load -= 12
-                    xx_load += 12
+                    x_load -= 15
+                    xx_load += 15
                     barra_loading = pygame.Rect(xx_load, 20, x_load, 10)
 
                 if game_over:
