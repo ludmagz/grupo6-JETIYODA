@@ -122,7 +122,7 @@ mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
 tempo_inicial=pygame.time.get_ticks()
-tempo_total= 1*74*1000
+tempo_total= 1*70*1000
 na_ufpe = False
 check = 0
 fundo_restart = backgrounds[:]
@@ -238,21 +238,23 @@ def game_loop():
             texto_formatado = fonte.render(texto, False, RED)
             texto1_formatado=fonte.render(texto1, False, RED)
 
-            if tempo_restante<=0:
+            if tempo_corrido >= tempo_total:
                 game_over=True
             if game_over:
-                if pontos>=350 and tempo_restante<=0 and vidas>0:
+                if pontos>=350 and (tempo_corrido >= tempo_total or tempo_corrido <= 0) and vidas>0:
                     tela.blit(tela_final3_fundo, (0, 0))
                     pygame.display.flip()
                     ganhou = True
-                    
-                if tempo_restante>0:  
+                
+                elif pontos<350  and vidas<=0:  
                     tela.blit(tela_final1_fundo, (0, 0))
                     pygame.display.flip()
-                    
-                if pontos<350 and tempo_restante<=0 and vidas<=0:  
+ 
+                else:  
                     tela.blit(tela_final2_fundo, (0, 0))
                     pygame.display.flip()
+                    
+                
             for evento in pygame.event.get():
 
                 # Sair do jogo fora da tela inicial
@@ -266,10 +268,10 @@ def game_loop():
                         espaco = True
 
                     elif evento.key == pygame.K_r and game_over and ganhou == False:
-                        tempo_inicial = tempo_total
+                        tempo_inicial = pygame.time.get_ticks()
                         backgrounds.clear()
                         tempo_corrido = 0
-                        tempo_restante = tempo_total
+                        tempo_restante = tempo_total - pygame.time.get_ticks()
                         tela_inicial = False
                         espaco = False
                         mapa = 0
@@ -311,6 +313,9 @@ def game_loop():
                     if game_over and ganhou:
                         ganhou = False
                         tela_inicial = True
+                        tempo_inicial = pygame.time.get_ticks()
+                        tempo_corrido = 0
+                        tempo_restante = tempo_total - pygame.time.get_ticks()
 
             # Tela de Game Over
             
@@ -514,10 +519,13 @@ def game_loop():
                 
                 if (agora - tempo_robocin) >= 5000:
                     infinito = False
-                if tempo_restante <= 13000:
-                    backgrounds.extend(backgrounds_ufpe)
+                if tempo_corrido >= 58000:
+                    if not na_ufpe:
+                        backgrounds.extend(backgrounds_ufpe)
+                        na_ufpe = True
                 else:
                     backgrounds = fundo_restart[:]
-                
-        
+                    na_ufpe = False
+            print('14 no maximo', tempo_restante, agora, tempo_total, tempo_corrido, tempo_atual, tempo_inicial)  
+            print(type(fundo_restart),len(fundo_restart), type(backgrounds), len(backgrounds))      
 game_loop()
