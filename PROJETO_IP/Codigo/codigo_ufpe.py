@@ -122,7 +122,7 @@ mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
 tempo_inicial=pygame.time.get_ticks()
-tempo_total= 1*70*1000
+tempo_total= 1*71*1000
 na_ufpe = False
 check = 0
 fundo_restart = backgrounds[:]
@@ -525,7 +525,5 @@ def game_loop():
                         na_ufpe = True
                 else:
                     backgrounds = fundo_restart[:]
-                    na_ufpe = False
-            print('14 no maximo', tempo_restante, agora, tempo_total, tempo_corrido, tempo_atual, tempo_inicial)  
-            print(type(fundo_restart),len(fundo_restart), type(backgrounds), len(backgrounds))      
+                    na_ufpe = False    
 game_loop()
