@@ -1,6 +1,7 @@
 import pygame
 
-tamanho_inicial = [200, 150]
+tamanho_inicial_robocin = [200, 150]
+tamanho_inicial_progresso = [720, 270]
 
 # Função de colisão com os fragmentos de crachá, aumentandos os pontos
 
@@ -54,9 +55,15 @@ def colisao_robocin(robocins, x, y, infinito, tempo_robocin,robocin_coletado):
     
     return robocins, infinito, tempo_robocin
 
-def atualizar_tamanho(tamanho, tempo_passado):
+def atualizar_tamanho(tamanho, tempo_passado, duracao):
 
-    duracao = 5000
     fator_diminuição = tempo_passado / duracao  # Fator de diminuição por segundo
 
-    tamanho[0] = max(tamanho_inicial[0] *(1 - fator_diminuição), 0)
+    tamanho[0] = max(tamanho_inicial_robocin[0] *(1 - fator_diminuição), 0)
+
+def atualizar_tamanho_progresso(tamanho, tempo_passado, duracao):
+
+
+    fator_diminuição = tempo_passado / duracao  # Fator de diminuição por segundo
+
+    tamanho[0] = max(tamanho_inicial_progresso[0] *(1 - fator_diminuição), 0)

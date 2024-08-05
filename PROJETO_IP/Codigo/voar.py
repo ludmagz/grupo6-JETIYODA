@@ -75,19 +75,36 @@ def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3,
                 if frames % 15 == 0:
                     index = (index + 1) % 3
 
-                if index == 0:
+                if index == 0 and infinito == False:
                     tela.blit(sprite_baixo1_c, (x, 550))
-                elif index == 1:
+                elif index == 1 and infinito == False:
                     tela.blit(sprite_baixo2_c, (x, 550))
-                elif index == 2:
+                elif index == 2 and infinito == False:
                     tela.blit(sprite_baixo3_c, (x, 550))
 
+                elif index == 0 and infinito == True:
+                    tela.blit(sprite_robocin1, (x, 550))
+                elif index == 1 and infinito == True:
+                    tela.blit(sprite_robocin2, (x, 550))
+                elif index == 2 and infinito == True:
+                    tela.blit(sprite_robocin3, (x, 550))
+
                 frames += 1
-        elif tecla[pygame.K_SPACE] or espaco:
+
+        elif tecla[pygame.K_SPACE] and infinito == False:
+
             tela.blit(sprite_voando_c, (x, y))
             frames = 0
             espaco = False
+
+        elif tecla[pygame.K_SPACE] and infinito == True:
+            tela.blit(sprite_robocin4, (x, y))
+            frames = 0
+
         else:
-            tela.blit(sprite_voando2_c, (x, y))
+            if infinito == False:
+                tela.blit(sprite_voando2_c, (x, y))
+            else:
+                tela.blit(sprite_robocin5, (x, y))
 
     return y, x, gravidade, frames, index
