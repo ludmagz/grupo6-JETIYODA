@@ -278,6 +278,8 @@ def game_loop():
                         espaco = True
 
                     elif evento.key == pygame.K_r and game_over and ganhou == False:
+                        pygame.mixer.music.set_volume(0.8)
+                        pygame.mixer.music.play(-1)
                         tempo_inicial = pygame.time.get_ticks()
                         backgrounds.clear()
                         tempo_corrido = 0
