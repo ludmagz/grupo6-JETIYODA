@@ -62,7 +62,7 @@ def inicializar_fundos():
         mapa = 0 
         fundo = backgrounds[mapa]
         proximo_fundo = backgrounds[mapa + 1]
-    fundos_ufpe = ['Fundos UFPE/ufpe1.png', 'Fundos UFPE/ufpeCAC.png','Fundos UFPE/ufpeCFCH.png', 'Fundos UFPE/ufpeCTG.png', 'Fundos UFPE/ufpeMATO.png', 'Fundos UFPE/ufpeCIN.png']
+    fundos_ufpe = ['Fundos UFPE/ufpe1.png', 'Fundos UFPE/ufpeCAC.png','Fundos UFPE/ufpeCFCH.png', 'Fundos UFPE/ufpeCTG.png', 'Fundos UFPE/ufpeMATO.png', 'Fundos UFPE/ufpeCIN.png','Fundos UFPE/ufpeMATO2.png']
     backgrounds_ufpe = []
     for fundo in fundos_ufpe:
         bg = pygame.transform.scale(pygame.image.load(fundo).convert(), (largura, altura))
