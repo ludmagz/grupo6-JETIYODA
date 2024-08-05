@@ -81,11 +81,11 @@ Já sobre os erros cometidos durante a execução, o principal deles foi a falta
 
 ## INSTRUÇÕES DE JOGABILIDADE:
 
-- Aperte a tecla “espaço” para voar.
-- Para vencer o jogador deve coletar 350 fragmentos de crachás e chegar ao CIn.
-- Caso o jogador bata três vezes em “Foguinhos”, ele perde.
-- Ao coletar corações é aumentada uma vida (a quantidade de vidas aparece no canto direito da tela e indica em quantos foguinhos o jogador pode bater sem que perca o jogo).
-- Ao coletar o “Robocin”, o personagem adquire imunidade aos “Foguinhos” por 6 segundos (no canto superior esquerdo é indicado em uma barra verde o quanto falta para que esse efeito seja desfeito).
+- Aperte a tecla “espaço” para voar;
+- Para vencer o jogador deve coletar 350 fragmentos de crachás e chegar ao CIn;
+- Caso o jogador bata três vezes em “Foguinhos”, ele perde;
+- Ao coletar corações é aumentada uma vida (a quantidade de vidas aparece no canto direito da tela e indica em quantos foguinhos o jogador pode bater sem que perca o jogo);
+- Ao coletar o “Robocin”, o personagem adquire imunidade aos “Foguinhos” por 6 segundos (no canto superior esquerdo é indicado em uma barra verde o quanto falta para que esse efeito seja desfeito);
 - Na parte de cima da tela de display do jogo se situa uma barra de progressão, que indica o quanto falta para que o jogador chegue ao CIn.
 
 
