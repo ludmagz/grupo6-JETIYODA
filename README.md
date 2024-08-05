@@ -64,7 +64,7 @@ Para a elaboração deste projeto, foi utilizada a biblioteca PyGame, por meio d
 
 
 ## 📖 CONCEITOS DA DISCIPLINA UTILIZADOS NO PROJETO:
-No projeto, foram utilizados diversos conceitos abordados na disciplina de Introdução à Programação, entre eles, pode-se destacar:
+No projeto, foram utilizados diversos conceitos abordados na disciplina de Introdução à Programação, que podem ser encontrados por toda a extensão do código. Entre eles, pode-se destacar:
 - Estruturas condicionais (if, elif e else);
 - Laços de repetição (for e while);
 - Listas e Tuplas;
@@ -76,15 +76,16 @@ Desse modo, é perceptível o caráter educativo da disciplina, permitindo ao gr
 
 Entre os diversos desafios que se opuseram, sem sucesso, à finalização do jogo, é importante destacar a utilização do Git e do GitHub, uma vez que os membros da equipe nunca haviam tido contato com tais recursos. Além disso, o aprendizado de PyGame, a compreensão de como fazer, sem que houvesse uma sensação visual de cansaço para o usuário, o fundo passar em loop e a lógica para que diferentes coletáveis não se sobrepusessem foram outros entraves evidentes.
 Já sobre os erros cometidos durante a execução, o principal deles foi a falta de modularização inicial do código, o que culminou em uma dificuldade na compreensão do que estava sendo exposto. Porém, a equipe conseguiu reverter essa situação e aplicar melhor as Boas Práticas à produção.  
+Ademais, este trabalho pode, certamente, ser afirmado como edificante para o conhecimento e para a futura carreira, na área de informática, dos estudantes envolvidos. A partir dele, diversos conhecimentos puderam ser incorporados aos já antes obtidos, sendo também uma ótima forma de aplicar as habilidades Python dos alunos.
 
 
 
 ## 🏁 INSTRUÇÕES DE JOGABILIDADE:
 
 - Aperte a tecla “espaço” para voar;
-- Para vencer o jogador deve coletar 350 fragmentos de crachás (a quantidade de fragmentos coletados encontra-se no canto superior direito) e chegar ao CIn;
+- Para vencer, o jogador deve coletar 350 fragmentos de crachás (a quantidade de fragmentos coletados encontra-se no canto superior direito) e chegar ao CIn;
 - Caso o jogador bata três vezes em “Foguinhos”, ele perde;
-- Ao coletar corações é aumentada uma vida (a quantidade de vidas aparece no canto superior esquerdo da tela e indica em quantos foguinhos o jogador pode bater sem que perca o jogo);
+- Ao coletar corações, é aumentada uma vida (a quantidade de vidas aparece no canto superior esquerdo da tela e indica em quantos foguinhos o jogador pode bater sem que perca o jogo);
 - Ao coletar o “Robocin”, o personagem adquire imunidade aos “Foguinhos” por 6 segundos (no canto superior direito é indicado em uma barra verde o quanto falta para que esse efeito seja desfeito);
 - Na parte de cima da tela de display do jogo se situa uma barra de progressão, que indica o quanto falta para que o jogador chegue ao CIn.
 
