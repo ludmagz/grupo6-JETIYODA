@@ -11,7 +11,7 @@
 
 ## MEMBROS E SUAS RESPECTIVAS FUNÇÕES:
 - [Fernando Luís Campelo dos Anjos (flca)](https://github.com/flca-cin) –
-Delimitação da impossibilidade de os coletáveis colidirem entre si e correção de bugs.
+Contribuição na correção da possibilidade de os coletáveis colidirem entre si e correção de bugs.
 
 - [Ludmila Cabral Lopes Magnani (lclm)](https://github.com/ludmagz) –
 Design e implementação da lógica no código referente à tela inicial, à tela de instruções, à tela de vitória, e aos possíveis game overs, criação das artes do background do jogo (cidade + UFPE), criação da barra de progressão do jogo, participação na implementação do PyGame na base do código, elaboração do README.md e correção de bugs.
@@ -25,7 +25,7 @@ Implementação da progressividade dos fundos no jogo e correção de bugs.
 
 
 - [Matheus Miranda Cabral de Menezes (mmcm2)](https://github.com/mmcm2-cin) –
-Delimitação da impossibilidade de os coletáveis colidirem entre si, participação na implementação do PyGame na base do código e correção de bugs.
+Contribuição na correção da possibilidade de os coletáveis colidirem entre si, participação na implementação do PyGame na base do código e correção de bugs.
 
 
 
