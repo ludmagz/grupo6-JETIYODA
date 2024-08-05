@@ -14,7 +14,7 @@
 Contribuição na correção da possibilidade de os coletáveis colidirem entre si e correção de bugs.
 
 - [Ludmila Cabral Lopes Magnani (lclm)](https://github.com/ludmagz) –
-Design e implementação da lógica no código referente à tela inicial, à tela de instruções, à tela de vitória, e aos possíveis game overs, criação das artes do background do jogo (cidade + UFPE), criação da barra de progressão do jogo, participação na implementação do PyGame na base do código, elaboração do README.md e correção de bugs.
+Design e implementação da lógica no código referente à tela inicial, à tela de instruções, à tela de vitória e aos dois possíveis game overs, criação das artes do background do jogo (cidade + UFPE), criação da barra de progressão do jogo, participação na implementação do PyGame na base do código, elaboração do "README.md" e correção de bugs.
 
 - [Luísa de Mendonça Simões (lmsm2)](https://github.com/lmsm2) –
 Design das sprites do personagem (nas formas “Professor” e “Robocin”) e de todos os coletáveis, aplicação dos “Foguinhos” e “Fragmentos de crachás” no código, animação do personagem no jogo, introdução da trilha sonora e efeitos sonoros, participação na implementação do PyGame na base do código, elaboração dos slides e correção de bugs.
