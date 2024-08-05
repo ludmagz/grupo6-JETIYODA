@@ -468,9 +468,12 @@ def game_loop():
                                     listinha_de_intervalos.append(i)
 
                         if(existe_coracao):
-                            if ultimo_coracao[0]>largura-10:
-                                for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
-                                    listinha_de_intervalos.append(i)
+                            if coracoes != []:
+                                ultimo_coracao = coracoes[0].bottomright
+
+                                if ultimo_coracao[0]>largura-10:
+                                    for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
+                                        listinha_de_intervalos.append(i)
 
                         if (existe_robocin):
                             if robocins != []:
@@ -530,9 +533,12 @@ def game_loop():
                                     listinha_de_intervalos.append(i)
                                     
                         if(existe_coracao):
-                            if ultimo_coracao[0]>largura-10:
-                                for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
-                                    listinha_de_intervalos.append(i)
+                            if coracoes != []:
+                                ultimo_coracao = coracoes[0].bottomright
+
+                                if ultimo_coracao[0]>largura-10:
+                                    for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
+                                        listinha_de_intervalos.append(i)
 
                         if (existe_robocin):
                             if robocins != []:
@@ -608,7 +614,6 @@ def game_loop():
                             coracoes.clear()
                         
                         coracoes.append(pygame.Rect(x_coracao, y_coracao, 40, 40))
-                        ultimo_coracao = coracoes[0].bottomright
 
                     if (agora - tempo_rob) >= 20000:
                         existe_robocin = True
@@ -650,9 +655,12 @@ def game_loop():
                                         listinha_de_intervalos.append(i)
 
                             if(existe_coracao):
-                                if ultimo_coracao[0]>largura-10:
-                                    for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
-                                        listinha_de_intervalos.append(i)
+                                if coracoes != []:
+                                    ultimo_coracao = coracoes[0].bottomright
+
+                                    if ultimo_coracao[0]>largura-10:
+                                        for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
+                                            listinha_de_intervalos.append(i)
 
                             y_robocin = random.randint(50, altura - 50)
                             x_robocin = largura
