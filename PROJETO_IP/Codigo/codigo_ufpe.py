@@ -424,30 +424,41 @@ def game_loop():
                 pygame.display.flip()
 
                 #Excluindo as ordenadas que já possuem algum objeto problemático
+
                 if len(fragmentos) <= 10:
                     listinha_de_intervalos = []
 
                     if(fragmentos):
+                        ultimo_frag = fragmentos[-1].bottomright
+
                         if ultimo_frag[0]>largura-30:
                             for i in range(ultimo_frag[1]-43-100,ultimo_frag[1]+3):
                                 listinha_de_intervalos.append(i)
 
                     if (len(fragmentos)>5):
+                        ultimo_frag2 = fragmentos[-6].bottomright
+
                         if ultimo_frag2[0]>largura-30:
                             for i in range(ultimo_frag2[1]-43-100,ultimo_frag2[1]+3):
                                 listinha_de_intervalos.append(i)
 
                     if (len(fragmentos)>10):
+                        ultimo_frag3 = fragmentos[-11].bottomright
+
                         if ultimo_frag3[0]>largura-30:
                             for i in range(ultimo_frag3[1]-43-100,ultimo_frag3[1]+3):
                                 listinha_de_intervalos.append(i)
 
                     if(lasers):
+                        ultimo_laser = lasers[-1].bottomright
+
                         if ultimo_laser[0]>largura-10:
                             for i in range(ultimo_laser[1]-103-100,ultimo_laser[1]+3):
                                 listinha_de_intervalos.append(i)
 
                     if(len(lasers)>1):
+                        penultimo_laser = lasers[-2].bottomright
+
                         if penultimo_laser[0]>largura-10:
                             for i in range(penultimo_laser[1]-103-100,penultimo_laser[1]+3):
                                 listinha_de_intervalos.append(i)
@@ -466,6 +477,7 @@ def game_loop():
                                     listinha_de_intervalos.append(i)
  
                     y_fragmento = random.randint(50, altura - 50)
+
                     while(y_fragmento in listinha_de_intervalos):
                         y_fragmento = random.randint(50, altura - 50)
 
@@ -473,42 +485,42 @@ def game_loop():
                         x_fragmento = largura + i * 40
                         fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
 
-                if(fragmentos):
-                    ultimo_frag = fragmentos[-1].bottomright
-                if(len(fragmentos)>5):
-                    ultimo_frag2 = fragmentos[-6].bottomright
-                if(len(fragmentos)>10):
-                    ultimo_frag3 = fragmentos[-11].bottomright
-                if(lasers):
-                    ultimo_laser = lasers[-1].bottomright
-                if(len(lasers)>1):
-                    penultimo_laser = lasers[-2].bottomright
 
                 if len(lasers) <= 2:
                     y_lasers = random.randint(50, altura - 50)
                     listinha_de_intervalos = []
 
                     if(fragmentos):
+                        ultimo_frag = fragmentos[-1].bottomright
+
                         if ultimo_frag[0]>largura-30:
                             for i in range(ultimo_frag[1]-43-100,ultimo_frag[1]+3):
                                 listinha_de_intervalos.append(i)
 
                     if (len(fragmentos)>5):
+                        ultimo_frag2 = fragmentos[-6].bottomright
+
                         if ultimo_frag2[0]>largura-30:
                             for i in range(ultimo_frag2[1]-43-100,ultimo_frag2[1]+3):
                                 listinha_de_intervalos.append(i)
 
                     if (len(fragmentos)>10):
+                        ultimo_frag3 = fragmentos[-11].bottomright
+
                         if ultimo_frag3[0]>largura-30:
                             for i in range(ultimo_frag3[1]-43-100,ultimo_frag3[1]+3):
                                 listinha_de_intervalos.append(i)
 
                     if(lasers):
+                        ultimo_laser = lasers[-1].bottomright
+
                         if ultimo_laser[0]>largura-10:
                             for i in range(ultimo_laser[1]-103-100,ultimo_laser[1]+3):
                                 listinha_de_intervalos.append(i)
 
                     if(len(lasers)>1):
+                        penultimo_laser = lasers[-2].bottomright
+
                         if penultimo_laser[0]>largura-10:
                             for i in range(penultimo_laser[1]-103-100,penultimo_laser[1]+3):
                                 listinha_de_intervalos.append(i)
@@ -594,7 +606,7 @@ def game_loop():
                     coracoes.append(pygame.Rect(x_coracao, y_coracao, 40, 40))
                     ultimo_coracao = coracoes[0].bottomright
 
-                if (agora - tempo_rob) >= 3000:
+                if (agora - tempo_rob) >= 20000:
                     existe_robocin = True
                     tempo_rob = pygame.time.get_ticks()
 
@@ -658,7 +670,9 @@ def game_loop():
                 else:
                     backgrounds = fundo_restart[:]
                     na_ufpe = False  
+
                 if tempo_corrido >= 69850:
                     velocidade_tela = 0  
+
             print(tempo_corrido)
 game_loop()
