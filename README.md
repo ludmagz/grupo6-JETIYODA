@@ -2,14 +2,14 @@
 
 > No jogo “JETIYODA: TestCase Ride!!!”, o jogador controla Juliano Iyoda, professor do Centro de Informática, que, buscando ajudar um aluno a terminar a lista de Introdução à Programação, parte em direção ao CIn. Sabendo do trânsito que o aguarda nas ruas movimentadas do Recife, o professor, com o intuito de chegar rapidamente e conter o desespero do aluno, opta por usar uma mochila a jato (Jetpack) e tornar mais eficiente a sua trajetória. Porém, enquanto já estava voando em direção à faculdade, Juliano nota a CHOCANTE ausência de seu crachá, o que, caso não houvesse inúmeros fragmentos de crachá espalhados pelos ares recifenses, teria causado a impossibilidade de adentrar as maravilhosas instalações do CIn. Logo, percebendo os fragmentos espalhados e contabilizando quantos seriam necessários para formar sua identificação completa, Juliano percebe que, caso ele coletasse 350 fragmentos e desviasse de todos os empecilhos que, com certeza, querem o impedir de ajudar seu querido aluno, ele alcançaria seu objetivo. Sabendo que o grande Juliano Iyoda não é um homem de falhas, ele não aceitará menos do que uma chegada triunfante ao Centro de Informática e um “Submission Accepted” vindo do “Dikastis” de seu aluno.
 
-## COMO ACESSAR O JOGO
+## 🔎 COMO ACESSAR O JOGO?
 1.	Certifique-se de ter o [Python](https://www.python.org/) instalado na sua máquina;
 2.	Caso ainda não possua a biblioteca [PyGame](https://www.pygame.org/) instalada, abra o terminal do seu computador e execute o comando “pip install pygame”;
 3.	Acesse, nesse repositório, o arquivo .zip referente ao projeto e faça o download;
 4.	Retire a pasta PROJETO_IP e, em sua IDE de preferência, execute o arquivo “codigo_principal”;
 5.	Para acessar às instruções do jogo, você pode clicar “i” no menu inicial ou [ler aqui](https://github.com/ludmagz/grupo6-JETIYODA/blob/main/README.md#instru%C3%A7%C3%B5es-de-jogabilidade)
 
-## MEMBROS E SUAS RESPECTIVAS FUNÇÕES:
+## 👩‍💻 MEMBROS E SUAS RESPECTIVAS FUNÇÕES:
 - [Fernando Luís Campelo dos Anjos (flca)](https://github.com/flca-cin) –
 Contribuição na correção da possibilidade de os coletáveis colidirem entre si e correção de bugs.
 
@@ -35,10 +35,10 @@ Implementação da funcionalidade dos coletáveis “Robocin” e “Corações�
 
 
 
-## ARQUITETURA DO PROJETO:
+## 🖥️ ARQUITETURA DO PROJETO:
 
 
-## CAPTURAS DE TELA:
+## 🖼️ CAPTURAS DE TELA:
 ### tela inicial
 ![Captura de tela 2024-08-04 213208](https://github.com/user-attachments/assets/119f9164-38e7-43d3-8c5c-1e7b117cb9b0)
 ### instruções
@@ -57,13 +57,13 @@ Implementação da funcionalidade dos coletáveis “Robocin” e “Corações�
 
 
 
-## FERRAMENTAS, BIBLIOTECAS E SEUS USOS:
+## ⚙️ FERRAMENTAS, BIBLIOTECAS E SEUS USOS:
 Para a criação deste projeto, foi utilizada a biblioteca PyGame, por meio da qual foi possível estruturar o código visando a criação de um jogo. Essa biblioteca proporcionou a possibilidade de reconhecer as teclas digitadas pelos usuários como input para a execução do game, além de criar a tela de display, a hitbox do personagem, obstáculos e coletáveis, permitir a manipulação das sprites e muitas outras funcionalidades relacionadas à jogabilidade. Além disso, foram também utilizadas a biblioteca Sys, que permitiu a interrupção do código quando o usuário clica no “X” no canto superior esquerdo da tela, a biblioteca Random para a geração dos coletáveis e obstáculos de maneira aleatória e a biblioteca Time para o controle do tempo de jogo.  Ademais, foi utilizada a plataforma online [Pixilart](https://www.pixilart.com/) para a criação da parte artística do trabalho.
 
 
 
 
-## CONCEITOS DA DISCIPLINA UTILIZADOS NO PROJETO:
+## 📖 CONCEITOS DA DISCIPLINA UTILIZADOS NO PROJETO:
 No projeto, foram utilizados diversos conceitos abordados na disciplina de Introdução à Programação, entre eles, pode-se destacar:
 - Estruturas condicionais (if, elif e else);
 - Laços de repetição (for e while);
@@ -72,14 +72,14 @@ No projeto, foram utilizados diversos conceitos abordados na disciplina de Intro
 
 Desse modo, é perceptível o caráter educativo da disciplina, permitindo ao grupo aplicar o que foi ensinado durante o semestre somado à busca constante pela manutenção das boas práticas no ambiente python no desenvolvimento de JETIYODA: TestCase Ride!!!
 
-## DESAFIOS E ERROS ENFRENTADOS DURANTE A EXECUÇÃO DO PROJETO:
+## ⁉️ DESAFIOS E ERROS ENFRENTADOS DURANTE A EXECUÇÃO DO PROJETO:
 
 Entre os diversos desafios que se opuseram, sem sucesso, à finalização do jogo, é importante destacar a utilização do Git e do GitHub, uma vez que os membros da equipe nunca haviam tido contato com tais recursos. Além disso, o aprendizado de PyGame, a compreensão de como fazer, sem que houvesse uma sensação visual de cansaço para o usuário, o fundo passar em loop e a lógica para que diferentes coletáveis não se sobrepusessem foram outros entraves evidentes.
 Já sobre os erros cometidos durante a execução, o principal deles foi a falta de modularização inicial do código, o que culminou em uma dificuldade na compreensão do que estava sendo exposto. Porém, a equipe conseguiu reverter essa situação e aplicar melhor as Boas Práticas à produção.  
 
 
 
-## INSTRUÇÕES DE JOGABILIDADE:
+## 🏁 INSTRUÇÕES DE JOGABILIDADE:
 
 - Aperte a tecla “espaço” para voar;
 - Para vencer o jogador deve coletar 350 fragmentos de crachás e chegar ao CIn;
