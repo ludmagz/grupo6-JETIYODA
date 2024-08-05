@@ -7,8 +7,7 @@
 2.	Caso ainda não possua a biblioteca [PyGame](https://www.pygame.org/) instalada, abra o terminal do seu computador e execute o comando “pip install pygame”;
 3.	Acesse, nesse repositório, o arquivo .zip referente ao projeto e faça o download;
 4.	Retire a pasta PROJETO_IP e, em sua IDE de preferência, execute o arquivo “codigo_principal”;
-5.	Para acessar às instruções do jogo, você pode clicar “i” no menu inicial ou [ler aqui](https://github.com/ludmagz/grupo6-JETIYODA/main/README.md#instru%C3%A7%C3%B5es-de-jogabilidade)
-
+5.	Para acessar às instruções do jogo, você pode clicar “i” no menu inicial ou [ler aqui](https://github.com/ludmagz/grupo6-JETIYODA/blob/main/README.md#instru%C3%A7%C3%B5es-de-jogabilidade)
 
 ## MEMBROS E SUAS RESPECTIVAS FUNÇÕES:
 - [Fernando Luís Campelo dos Anjos (flca)](https://github.com/flca-cin) –
