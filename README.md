@@ -50,6 +50,7 @@ Implementação da funcionalidade dos coletáveis “Robocin” e “Corações�
 ![Captura de tela 2024-08-04 220606](https://github.com/user-attachments/assets/3fd574ad-b40d-48b1-b858-7816b9a371df)
 ### game over 1
 ### game over 2
+### vitória
 
 
 
