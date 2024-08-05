@@ -1,6 +1,6 @@
 import pygame
 
-def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c, infinito, sprite_robocin1, sprite_robocin2, sprite_robocin3, sprite_robocin4, sprite_robocin5):
+def voando(y, x, gravidade, altura):
 
     tecla = pygame.key.get_pressed()
 
@@ -29,6 +29,11 @@ def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3,
     elif y > altura - 140:
         y = altura - 140
 
+    return y, x, gravidade
+
+def mudanca_sprites(index, frames, infinito, tela, x, y, pontos, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_robocin1, sprite_robocin2, sprite_robocin3, sprite_voando, sprite_robocin4, sprite_voando2, sprite_robocin5, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c):
+
+    tecla = pygame.key.get_pressed()
     # Mudança de sprite do personagem de acordo com a ação dele
     if pontos<350:
 
@@ -95,7 +100,6 @@ def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3,
 
             tela.blit(sprite_voando_c, (x, y))
             frames = 0
-            espaco = False
 
         elif tecla[pygame.K_SPACE] and infinito == True:
             tela.blit(sprite_robocin4, (x, y))
@@ -107,4 +111,4 @@ def voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3,
             else:
                 tela.blit(sprite_robocin5, (x, y))
 
-    return y, x, gravidade, frames, index
+    return y, x, frames, index

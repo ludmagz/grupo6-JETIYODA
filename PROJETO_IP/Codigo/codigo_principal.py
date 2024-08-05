@@ -350,7 +350,8 @@ def game_loop():
             if not game_over:        
                 
                 # Função para voar
-                y, x, gravidade, frames, index = voando(y, x, gravidade, altura, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprite_voando, sprite_voando2, tela, espaco, frames, index, pontos, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c, infinito, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5)
+                y, x, gravidade = voando(y, x, gravidade, altura)
+                y, x, frames, index = mudanca_sprites(index, frames, infinito, tela, x, y, pontos, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprite_voando, sprites_robocin4, sprite_voando2, sprites_robocin5, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c)
 
                 if infinito == True:
                     tempo_passado = pygame.time.get_ticks() - tempo_robocin
