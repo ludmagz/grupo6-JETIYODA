@@ -82,12 +82,17 @@ vidas_imagem = pygame.transform.scale(vidas_imagem,(40,40))
 robocin = pygame.transform.scale(robocin,(40,40))
 
 musica_fundo=pygame.mixer.music.load('musicas/musica_fundo.mp3')
-pygame.mixer.music.play(-1)
 
 coleta_cracha=pygame.mixer.Sound('musicas/coleta_cracha.wav')
 robocin_coletado=pygame.mixer.Sound('musicas/robocin_coletado.wav')
 vida_som=pygame.mixer.Sound('musicas/vida_som.wav')
 fogo_som=pygame.mixer.Sound('musicas/fogo_som.wav')
+intro=pygame.mixer.Sound('musicas/intro.wav')
+morreu=pygame.mixer.Sound('musicas/morreu.wav')
+perdeu=pygame.mixer.Sound('musicas/perdeu.wav')
+vitoria=pygame.mixer.Sound('musicas/vitoria.wav')
+
+intro.play()
 
 
 # Variáveis iniciais =========================================
@@ -147,7 +152,7 @@ def mostrar_tela_informacoes():
 # Loop principal do jogo ======================================
 
 def game_loop():
-    global tempo_barra, barra_loading, x_load, xx_load, tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som, primeiro_robocin, na_ufpe, check, backgrounds, backgrounds_ufpe, ganhou
+    global tempo_barra, barra_loading, x_load, xx_load, tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som, primeiro_robocin, na_ufpe, check, backgrounds, backgrounds_ufpe, ganhou,musica_fundo,intro,morreu,perdeu,vitoria
     
     tela_inicial = True
     tela_info = False
@@ -171,6 +176,8 @@ def game_loop():
 
                     if evento.key == pygame.K_s and tela_info == False:
                         tela_inicial = False
+                        pygame.mixer.music.set_volume(0.8)
+                        pygame.mixer.music.play(-1)
                         x = 100
                         y = (altura / 2) - 40
                         velocidade_tela = 1
@@ -241,17 +248,21 @@ def game_loop():
             if tempo_corrido >= tempo_total:
                 game_over=True
             if game_over:
+                pygame.mixer.music.stop()
                 if pontos>=350 and (tempo_corrido >= tempo_total or tempo_corrido <= 0) and vidas>0:
                     tela.blit(tela_final3_fundo, (0, 0))
+                    vitoria.play()
                     pygame.display.flip()
                     ganhou = True
 
                 elif pontos<350 and (tempo_corrido >= tempo_total) and vidas>0:  
                     tela.blit(tela_final2_fundo, (0, 0))
+                    perdeu.play()
                     pygame.display.flip()
                 
                 elif vidas<=0 and tempo_corrido < tempo_total:  
                     tela.blit(tela_final1_fundo, (0, 0))
+                    morreu.play()
                     pygame.display.flip()
               
             for evento in pygame.event.get():
