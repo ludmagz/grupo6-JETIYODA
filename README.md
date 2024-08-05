@@ -30,7 +30,7 @@ Contribuição na correção da possibilidade de os coletáveis colidirem entre 
 
 
 - [Miguel Câmara Raposo Andrade (mcra)](https://github.com/mcra3287) –
-Implementação da funcionalidade dos coletáveis “Robocin” e “Corações”, organização do código em módulos e repartido em funções, criação do sistema de voo e gravidade e correção de bugs.
+Implementação da funcionalidade dos coletáveis “Robocin” e “Corações”, organização do código em módulos e repartição em funções, criação do sistema de voo e gravidade e correção de bugs.
 
 
 
