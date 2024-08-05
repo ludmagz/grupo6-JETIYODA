@@ -22,7 +22,7 @@ Design das sprites do personagem (nas formas “Professor” e “Robocin”), d
 
 
 - [Luiz Felipe Vicente da Silva (lfvs2)](https://github.com/lfvs2) –
-Implementação no código da progressividade dos fundos no jogo e correção de bugs.
+Implementação da progressividade dos fundos no jogo e correção de bugs.
 
 
 - [Matheus Miranda Cabral de Menezes (mmcm2)](https://github.com/mmcm2-cin) –
