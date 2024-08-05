@@ -97,6 +97,7 @@ intro.play()
 
 # Variáveis iniciais =========================================
 
+
 tamanho_inicial_robocin = [200, 150]  # Largura e altura (largura, altura)
 tamanho_atual_robocin = tamanho_inicial_robocin.copy()  # Começa com o tamanho inicial
 tamanho_inicial_progresso = [720, 270]
@@ -128,7 +129,7 @@ posicao_mapa = 0
 mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
-tempo_total= 1*72*1000
+tempo_total= 1*70*1000
 na_ufpe = False
 check = 0
 fundo_restart = backgrounds[:]
@@ -154,6 +155,7 @@ def mostrar_tela_informacoes():
 # Loop principal do jogo ======================================
 
 def game_loop():
+
     global tempo_barra, barra_loading, x_load, xx_load, tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som, primeiro_robocin, na_ufpe, check, backgrounds, backgrounds_ufpe, ganhou, coracoes, robocins, musica_fundo,intro,morreu,perdeu,vitoria, tempo_inicial_progresso, tamanho_atual_progresso
     
     tela_inicial = True
@@ -163,11 +165,10 @@ def game_loop():
     while True:
         fps.tick(100)
         if tela_inicial:
-            
+
             tempo_inicial_progresso = pygame.time.get_ticks()
             if tela_info == False:
                 mostrar_tela_inicial()
-
             for evento in pygame.event.get():
 
                 # Sair do jogo ainda na tela inicial
@@ -276,7 +277,6 @@ def game_loop():
                     tela.blit(tela_final1_fundo, (0, 0))
                     morreu.play()
                     pygame.display.flip()
-            
                 tempo_inicial_progresso = pygame.time.get_ticks()
             for evento in pygame.event.get():
 
@@ -394,21 +394,16 @@ def game_loop():
                     robocins, infinito, tempo_robocin = colisao_robocin(robocins, x, y, infinito, tempo_robocin,robocin_coletado)
 
                 pygame.draw.rect(tela, BLACK, contorno)
-
                 barra_time_now = pygame.time.get_ticks() - tempo_inicial_progresso
-
                 atualizar_tamanho_progresso(tamanho_atual_progresso, barra_time_now, 72000)
-
                 if tamanho_atual_progresso[0] > 0:
                     pygame.draw.rect(tela, (255, 255, 255), (990 - tamanho_atual_progresso[0], 20, tamanho_atual_progresso[0], 10))
-
                 if game_over:
                     tempo_inicial_progresso = pygame.time.get_ticks()
                     lasers.clear()
                     fragmentos.clear()
                     coracoes = []
                     robocins = []
-                    
             
                 tela.blit(fragmentos_cracha2, (1050, 40))
                 tela.blit(texto_formatado, (1090, 40))
@@ -429,6 +424,7 @@ def game_loop():
                 pygame.display.flip()
 
                 #Excluindo as ordenadas que já possuem algum objeto problemático
+
                 if len(fragmentos) <= 10:
                     listinha_de_intervalos = []
 
@@ -667,11 +663,16 @@ def game_loop():
                 if (agora - tempo_robocin) >= 6000:
                     infinito = False
 
-                if agora >= 57000:
+                if tempo_corrido >= 57000:
                     if not na_ufpe:
                         backgrounds.extend(backgrounds_ufpe)
                         na_ufpe = True
                 else:
                     backgrounds = fundo_restart[:]
-                    na_ufpe = False    
+                    na_ufpe = False  
+
+                if tempo_corrido >= 69850:
+                    velocidade_tela = 0  
+
+            print(tempo_corrido)
 game_loop()
