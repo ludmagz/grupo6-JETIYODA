@@ -70,7 +70,7 @@ No projeto, foram utilizados diversos conceitos abordados na disciplina de Intro
 - Listas e Tuplas;
 - Funções;
 
-Desse modo, é perceptível o caráter educativo da disciplina, permitindo ao grupo aplicar o que foi ensinado durante o semestre somado à busca constante pela manutenção das boas práticas no ambiente python no desenvolvimento de JETIYODA: TestCase Ride!!!
+Desse modo, é perceptível o caráter educativo da disciplina, permitindo ao grupo aplicar o que foi ensinado durante o semestre somado à busca constante pela manutenção das boas práticas no ambiente python no desenvolvimento de "JETIYODA: TestCase Ride!!!"
 
 ## ⁉️ DESAFIOS E ERROS ENFRENTADOS DURANTE A EXECUÇÃO DO PROJETO:
 
