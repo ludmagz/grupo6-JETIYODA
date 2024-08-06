@@ -45,7 +45,7 @@ Implementação da funcionalidade dos coletáveis “Robocin” e “Corações�
   +  📄 voar.py: módulo responsável pelo sistema de gravidade do voo do personagem no jogo.
 * 📂 coletaveis: sprite dos coletáveis (PNG).
 * 📂 Fundos: fundos da cidade (PNG).
-* 📂 fundos_UFPE: fundos da UFPE (PNG).
+* 📂 fundos UFPE: fundos da UFPE (PNG).
 * 📂 musicas: músicas tocadas durante o jogo.
 * 📂 sprites: sprites do personagem (PNG).
 * 📂 tela inicial: tela de início dp jogo e tela de instruções (PNG).
