@@ -39,9 +39,11 @@ Implementação da funcionalidade dos coletáveis “Robocin” e “Corações�
 📂 Projeto_IP: dentro desta pasta, localizam-se as subpastas referentes às diferentes partes do trabalho.
 * 📂 Codigo: aqui estão presentes todos os módulos Python para o funcionamento do jogo.
   +  📄 codigo_principal.py: onde se localiza o game loop.
-  +  📄 colisoes.py: módulo responsável pelas funções que envolvem as colisões entre obstáculos, coletáveis e o personagem principal. Armazena também a barra de progressão do jogo.
+  +  📄 colisoes.py: módulo responsável pelas funções que envolvem as colisões entre obstáculos, coletáveis e o personagem principal.
+  +  📄 intervalos.py: resaponsável pelo armazenamento das funções que definem o spawn de objetos no jogo.
   +  📄 obstaculos.py: módulo responsável pelas funções que definem o surgimento de obstáculos e coletáveis.
-  +  📄 Sprites.py: módulo responsável pelas funções quue definem a inicialização das sprites do personagem, coletáveis, obstáculos, a passagem de cenário e tudo que envolve a parte visual do jogo.
+  +  📄 outros.py: módulo responsável pelas funções que não precisam de um arquivo destinado apenas à elas.
+  +  📄 Sprites.py: módulo responsável pelas funções quue definem as sprites do personagem, coletáveis, obstáculos, a passagem de cenário e tudo que envolve a parte visual do jogo.
   +  📄 voar.py: módulo responsável pelo sistema de gravidade do voo do personagem no jogo.
 * 📂 coletaveis: sprite dos coletáveis (PNG).
 * 📂 Fundos: fundos da cidade (PNG).
