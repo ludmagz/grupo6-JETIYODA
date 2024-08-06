@@ -36,8 +36,8 @@ Implementação da funcionalidade dos coletáveis “Robocin” e “Corações�
 
 
 ## 🖥️ ARQUITETURA DO PROJETO:
-📂 Projeto_IP: dentro dessa pasta localizam-se as subpastas referentes às diferentes partes do trabalho.
-* 📂 Codigo: aqui estão presentes todos os módulos para o funcionamento do jogo.
+📂 Projeto_IP: dentro desta pasta, localizam-se as subpastas referentes às diferentes partes do trabalho.
+* 📂 Codigo: aqui estão presentes todos os módulos Python para o funcionamento do jogo.
   +  📄 codigo_principal.py: onde se localiza o game loop.
   +  📄 colisoes.py: módulo responsável pelas funções que envolvem as colisões entre obstáculos, coletáveis e o personagem principal. Armazena também a barra de progressão do jogo.
   +  📄 obstaculos.py: módulo responsável pelas funções que definem o surgimento de obstáculos e coletáveis.
