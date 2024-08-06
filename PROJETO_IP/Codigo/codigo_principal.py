@@ -399,7 +399,7 @@ def game_loop():
 
                 pygame.draw.rect(tela, BLACK, contorno)
                 barra_time_now = pygame.time.get_ticks() - tempo_inicial_progresso
-                atualizar_tamanho_progresso(tamanho_atual_progresso, barra_time_now, 72000)
+                atualizar_tamanho_progresso(tamanho_atual_progresso, barra_time_now, tempo_total)
                 if tamanho_atual_progresso[0] > 0:
                     pygame.draw.rect(tela, (255, 255, 255), (990 - tamanho_atual_progresso[0], 20, tamanho_atual_progresso[0], 10))
 
@@ -450,7 +450,7 @@ def game_loop():
                         listinha_de_intervalos, existe_coracao, tempo, coracoes = atualizar_intervalos_e_adicionar_coracao(fragmentos, lasers, existe_robocin, robocins, coracoes, largura, altura)
                     
                     # Criação do robocin
-                    if (agora - tempo_rob) >= 10000:
+                    if (agora - tempo_rob) >= 20000:
                         existe_robocin = True
                         tempo_rob = pygame.time.get_ticks()
 
