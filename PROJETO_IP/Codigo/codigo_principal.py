@@ -475,7 +475,7 @@ def game_loop():
                 if tempo_corrido >= 67000:
                     cin = True
 
-                if tempo_corrido >= 68750:
+                if tempo_corrido >= 68600:
                     velocidade_tela = 0
 
             print(tempo_corrido)
