@@ -134,7 +134,7 @@ posicao_mapa = 0
 mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
-tempo_total= 1*70*1000
+tempo_total= 1*69*1000
 na_ufpe = False
 check = 0
 fundo_restart = backgrounds[:]
@@ -475,7 +475,7 @@ def game_loop():
                 if tempo_corrido >= 67000:
                     cin = True
 
-                if tempo_corrido >= 69950:
+                if tempo_corrido >= 68750:
                     velocidade_tela = 0
 
             print(tempo_corrido)
