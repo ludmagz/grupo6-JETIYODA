@@ -1,11 +1,13 @@
+# Aqui estão todas as funções que analisam a colisão entre o jogador e os coletáveis ou obstáculos
+
 import pygame
 
 tamanho_inicial_robocin = [200, 150]
 tamanho_inicial_progresso = [720, 270]
 
-# Função de colisão com os fragmentos de crachá, aumentandos os pontos
+# Função de colisão com os fragmentos de crachá (aumentam os ponto do jogador)
 
-def colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, velocidade_objeto,coleta_cracha):
+def colisao_fragmentos(fragmentos, x, y, pontos,coleta_cracha):
 
     for fragmento in fragmentos[:]:
             if fragmento.colliderect(pygame.Rect(x, y, 104, 124)):
@@ -17,7 +19,7 @@ def colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, veloci
 
 # Função de colisão com os "lasers" (tiram vida do jogador)
 
-def colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, infinito,fogo_som):
+def colisao_laser(lasers, x, y, game_over, vidas, infinito, fogo_som):
     
     for laser in lasers[:]:
         if laser.colliderect(pygame.Rect(x, y, 104, 124)):
@@ -29,9 +31,9 @@ def colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_obj
             fogo_som.play() 
     return lasers, game_over, vidas
 
-# Função de colisão com os corações (restayram vida do jogaodor)
+# Função de colisão com os corações (restauram vida do jogaodor)
 
-def colisao_coracao(coracoes, tela, x, y, vida_imagem, vidas, velocidade_objeto,vida_som):
+def colisao_coracao(coracoes, x, y, vidas,vida_som):
      
     for coracao in coracoes[:]:
         if coracao.colliderect(pygame.Rect(x, y, 104, 124)):
@@ -44,6 +46,8 @@ def colisao_coracao(coracoes, tela, x, y, vida_imagem, vidas, velocidade_objeto,
     
     return coracoes, vidas
 
+# Função de colisão com o robocin (Deixam o jogador invulnerável por 6 segundos)
+
 def colisao_robocin(robocins, x, y, infinito, tempo_robocin,robocin_coletado):
 
     for robo in robocins[:]:
@@ -55,15 +59,5 @@ def colisao_robocin(robocins, x, y, infinito, tempo_robocin,robocin_coletado):
     
     return robocins, infinito, tempo_robocin
 
-def atualizar_tamanho(tamanho, tempo_passado, duracao):
-
-    fator_diminuição = tempo_passado / duracao  # Fator de diminuição por segundo
-
-    tamanho[0] = max(tamanho_inicial_robocin[0] *(1 - fator_diminuição), 0)
-
-def atualizar_tamanho_progresso(tamanho, tempo_passado, duracao):
 
 
-    fator_diminuição = tempo_passado / duracao  # Fator de diminuição por segundo
-
-    tamanho[0] = max(tamanho_inicial_progresso[0] *(1 - fator_diminuição), 0)

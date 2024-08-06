@@ -1,3 +1,5 @@
+# Aqui estão todas as funções que inicializam os sprites (imagens) do jogo, desde os sprites do jogador até os do fundo
+
 import pygame
 from pygame.locals import *
 from obstaculos import *
@@ -94,19 +96,3 @@ def inicializar_fundos():
     return tela_inicial_fundo, tela_instrucoes_fundo, backgrounds, tela_final1_fundo, tela_final2_fundo, tela_final3_fundo, backgrounds_ufpe
 
 
-# Reinicia as variáveis quando preciso
-def variaveis(fragmentos, lasers, altura, largura):
-
-    x = 100
-    y = (altura / 2) - 40
-    velocidade_tela = 1
-    velocidade_objeto = 5
-    gravidade = 0
-    pontos = 0
-    vidas = 3
-    fragmentos = []
-    lasers = []
-    fragmentos = criar_fragmentos(altura, largura)
-    lasers = criar_lasers(altura, largura)
-
-    return x, y, gravidade, pontos, vidas, fragmentos, lasers, velocidade_tela, velocidade_objeto

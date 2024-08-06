@@ -1,4 +1,7 @@
+# Aqui estão as funções de voo e de mudanças de sprites
+
 import pygame
+import random
 
 def voando(y, x, gravidade, altura):
 
@@ -112,3 +115,4 @@ def mudanca_sprites(index, frames, infinito, tela, x, y, pontos, sprite_baixo1, 
                 tela.blit(sprite_robocin5, (x, y))
 
     return y, x, frames, index
+

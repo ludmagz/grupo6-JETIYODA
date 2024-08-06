@@ -1,3 +1,5 @@
+# Aqui estão todas as funções que criam os coletáveis e os obstáculos
+
 import pygame
 import random
 

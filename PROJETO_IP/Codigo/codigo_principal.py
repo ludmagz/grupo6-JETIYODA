@@ -1,3 +1,5 @@
+# Código principal, onde a função e o loop principal são rodados
+
 import pygame
 from pygame.locals import *
 from sys import exit
@@ -6,6 +8,8 @@ from Sprites import *
 from voar import *
 from obstaculos import *
 from colisoes import *
+from outros import *
+from intervalos import *
 
 pygame.init()
 
@@ -101,6 +105,7 @@ intro.play()
 tamanho_inicial_robocin = [200, 150]  # Largura e altura (largura, altura)
 tamanho_atual_robocin = tamanho_inicial_robocin.copy()  # Começa com o tamanho inicial
 tamanho_inicial_progresso = [720, 270]
+listinha_de_intervalos = []
 tamanho_atual_progresso = tamanho_inicial_progresso.copy()
 x = 100
 y = (altura / 2) - 40
@@ -129,7 +134,7 @@ posicao_mapa = 0
 mapa = 0
 fundo = backgrounds[mapa]
 proximo_fundo = backgrounds[(mapa + 1)]
-tempo_total= 1*71*1000
+tempo_total= 1*70*1000
 na_ufpe = False
 check = 0
 fundo_restart = backgrounds[:]
@@ -157,7 +162,7 @@ def mostrar_tela_informacoes():
 
 def game_loop():
 
-    global tempo_barra, barra_loading, x_load, xx_load, tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som, primeiro_robocin, na_ufpe, check, backgrounds, backgrounds_ufpe, ganhou, coracoes, robocins, musica_fundo,intro,morreu,perdeu,vitoria, tempo_inicial_progresso, tamanho_atual_progresso, cin
+    global listinha_de_intervalos, tempo_barra, barra_loading, x_load, xx_load, tempo_rob, espaco, game_over, pontos, x, y, gravidade, frames, index, vidas, existe_coracao, tempo, posicao_mapa, mapa, fundo, proximo_fundo, velocidade_tela, velocidade_objeto,fragmentos,lasers,ultimo_frag,ultimo_laser,tempo_inicial, robocins, existe_robocin, infinito, tempo_robocin, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprites_robocin4, sprites_robocin5,musica_fundo,coleta_cracha,robocin_coletado,vida_som,fogo_som, primeiro_robocin, na_ufpe, check, backgrounds, backgrounds_ufpe, ganhou, coracoes, robocins, musica_fundo,intro,morreu,perdeu,vitoria, tempo_inicial_progresso, tamanho_atual_progresso, cin
     
     tela_inicial = True
     tela_info = False
@@ -212,10 +217,12 @@ def game_loop():
 
                         coracoes.append(pygame.Rect(x_coracao, y_coracao, 40, 40))
                     
+                    # Tela de informações
                     if evento.key == pygame.K_i:
                         tela_info = True
                         mostrar_tela_informacoes()
                     
+                    # Voltar á tela de menu
                     if evento.key == pygame.K_m and tela_info:
                         tela_info = False
 
@@ -260,6 +267,7 @@ def game_loop():
             if tempo_corrido >= tempo_total:
                 game_over=True
 
+            # Aqui é determinado o que acontece quando o jogador termina o jogo dependendo da quantidade de crachás e de vidas
             if game_over:
                 tamanho_atual_progresso = [720, 270]
                 pygame.mixer.music.stop()
@@ -279,6 +287,9 @@ def game_loop():
                     morreu.play()
                     pygame.display.flip()
                 tempo_inicial_progresso = pygame.time.get_ticks()
+
+
+
             for evento in pygame.event.get():
 
                 # Sair do jogo fora da tela inicial
@@ -291,6 +302,7 @@ def game_loop():
                     if evento.key == pygame.K_SPACE and not game_over:
                         espaco = True
 
+                    # Reinicia as variáveis e volta ao jogo
                     elif evento.key == pygame.K_r and game_over and ganhou == False:
                         pygame.mixer.music.set_volume(0.8)
                         pygame.mixer.music.play(-1)
@@ -318,6 +330,7 @@ def game_loop():
                         posicao_mapa = 0
                         y_fragmento = (altura/2)-100
                         tamanho_atual_progresso = [720, 270]
+
                         for i in range(5):
                             x_fragmento = largura + i * 40
                             fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
@@ -344,14 +357,35 @@ def game_loop():
                         tempo_inicial = pygame.time.get_ticks()
                         tempo_corrido = 0
                         tempo_restante = tempo_total - pygame.time.get_ticks()
-
-            # Tela de Game Over
             
             if not game_over:        
                 
                 # Função para voar
+
                 y, x, gravidade = voando(y, x, gravidade, altura)
+
+                # Função para mudar o sprite
+
                 y, x, frames, index = mudanca_sprites(index, frames, infinito, tela, x, y, pontos, sprite_baixo1, sprite_baixo2, sprite_baixo3, sprites_robocin1, sprites_robocin2, sprites_robocin3, sprite_voando, sprites_robocin4, sprite_voando2, sprites_robocin5, sprite_baixo1_c, sprite_baixo2_c, sprite_baixo3_c, sprite_voando_c, sprite_voando2_c)
+
+                # Funções de movimentação e colisão com os fragmentos de crachá, "lasers", corações e robocins
+
+                atualizar_e_desenhar_coletaveis(fragmentos, velocidade_objeto, tela, fragmentos_cracha)
+                fragmentos, pontos = colisao_fragmentos(fragmentos, x, y, pontos,coleta_cracha)
+                
+                atualizar_e_desenhar_coletaveis(lasers, velocidade_objeto, tela, foguinho)
+                lasers, game_over, vidas = colisao_laser(lasers, x, y, game_over, vidas, infinito, fogo_som)
+                
+                if existe_coracao == True:
+                    atualizar_e_desenhar_coletaveis(coracoes, velocidade_objeto, tela, vidas_imagem)
+                    coracoes, vidas = colisao_coracao(coracoes, x, y, vidas,vida_som)
+
+                if existe_robocin == True:
+                    atualizar_e_desenhar_coletaveis(robocins, velocidade_objeto, tela, robocin)
+                    robocins, infinito, tempo_robocin = colisao_robocin(robocins, x, y, infinito, tempo_robocin,robocin_coletado)
+
+
+                # Contagem do tempo de invencibilidade para desenhar barra de tempo em que você está invencível
 
                 if infinito == True:
                     tempo_passado = pygame.time.get_ticks() - tempo_robocin
@@ -360,47 +394,18 @@ def game_loop():
                 if infinito and tamanho_atual_robocin[0] > 0:
                     pygame.draw.rect(tela, (0, 250, 0), (1050, 100, tamanho_atual_robocin[0], 40))
 
-                # Funções de movimentação e colisão com os fragmentos de crachá e "lasers"
-                for fragmento in fragmentos[:]:
 
-                    fragmento.x -= velocidade_objeto
-                    tela.blit(fragmentos_cracha, fragmento.topleft)
-                    if fragmento.right < 0:
-                        fragmentos.remove(fragmento)
-                fragmentos, pontos = colisao_fragmentos(fragmentos, tela, x, y, fragmentos_cracha, pontos, velocidade_objeto,coleta_cracha)
-                
-                for laser in lasers[:]:
-
-                    laser.x -= velocidade_objeto
-                    tela.blit(foguinho, laser.topleft)
-                    if laser.right < 0:
-                        lasers.remove(laser)
-                lasers, game_over, vidas = colisao_laser(lasers, tela, x, y, foguinho, game_over, vidas, velocidade_objeto, infinito, fogo_som)
-                
-                if existe_coracao == True:
-
-                    for coracao in coracoes[:]:
-                        coracao.x -= velocidade_objeto
-                        tela.blit(vidas_imagem, coracao.topleft)
-                        if coracao.right < 0:
-                            coracoes.remove(coracao)
-                    coracoes, vidas = colisao_coracao(coracoes, tela, x, y, vidas_imagem, vidas, velocidade_objeto,vida_som)
-
-                if existe_robocin == True:
-                    
-                    for robo in robocins[:]:
-                        robo.x -= velocidade_objeto
-                        tela.blit(robocin, robo.topleft)
-                        if robo.right < 0:
-                            robocins.remove(robo)
-
-                    robocins, infinito, tempo_robocin = colisao_robocin(robocins, x, y, infinito, tempo_robocin,robocin_coletado)
+                # Barra de progresso
 
                 pygame.draw.rect(tela, BLACK, contorno)
                 barra_time_now = pygame.time.get_ticks() - tempo_inicial_progresso
                 atualizar_tamanho_progresso(tamanho_atual_progresso, barra_time_now, 72000)
                 if tamanho_atual_progresso[0] > 0:
                     pygame.draw.rect(tela, (255, 255, 255), (990 - tamanho_atual_progresso[0], 20, tamanho_atual_progresso[0], 10))
+
+                
+                # Reiniciando as variáveis quando dá game over
+
                 if game_over:
                     tempo_inicial_progresso = pygame.time.get_ticks()
                     lasers.clear()
@@ -426,252 +431,36 @@ def game_loop():
                         
                 pygame.display.flip()
 
-                #Excluindo as ordenadas que já possuem algum objeto problemático
+                # Excluindo as ordenadas que já possuem algum objeto problemático + criação dos fragmentos, lasers, corações e robocins
 
                 if cin == False:
+
                     if len(fragmentos) <= 10:
-                        listinha_de_intervalos = []
 
-                        if(fragmentos):
-                            ultimo_frag = fragmentos[-1].bottomright
-
-                            if ultimo_frag[0]>largura-30:
-                                for i in range(ultimo_frag[1]-43-100,ultimo_frag[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if (len(fragmentos)>5):
-                            ultimo_frag2 = fragmentos[-6].bottomright
-
-                            if ultimo_frag2[0]>largura-30:
-                                for i in range(ultimo_frag2[1]-43-100,ultimo_frag2[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if (len(fragmentos)>10):
-                            ultimo_frag3 = fragmentos[-11].bottomright
-
-                            if ultimo_frag3[0]>largura-30:
-                                for i in range(ultimo_frag3[1]-43-100,ultimo_frag3[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if(lasers):
-                            ultimo_laser = lasers[-1].bottomright
-
-                            if ultimo_laser[0]>largura-10:
-                                for i in range(ultimo_laser[1]-103-100,ultimo_laser[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if(len(lasers)>1):
-                            penultimo_laser = lasers[-2].bottomright
-
-                            if penultimo_laser[0]>largura-10:
-                                for i in range(penultimo_laser[1]-103-100,penultimo_laser[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if(existe_coracao):
-                            if coracoes != []:
-                                ultimo_coracao = coracoes[0].bottomright
-
-                                if ultimo_coracao[0]>largura-10:
-                                    for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
-                                        listinha_de_intervalos.append(i)
-
-                        if (existe_robocin):
-                            if robocins != []:
-                                ultimo_robocin = robocins[0].bottomright
-
-                                if ultimo_robocin[0]>largura-10:
-                                    for i in range(ultimo_robocin[1]-43-100,ultimo_robocin[1]+3):   
-                                        listinha_de_intervalos.append(i)
-    
-                        y_fragmento = random.randint(50, altura - 50)
-
-                        while(y_fragmento in listinha_de_intervalos):
-                            y_fragmento = random.randint(50, altura - 50)
-
-                        for i in range(5):
-                            x_fragmento = largura + i * 40
-                            fragmentos.append(pygame.Rect(x_fragmento, y_fragmento, 30, 40))
+                        listinha_de_intervalos, fragmentos = atualizar_intervalos_e_adicionar_fragmentos(fragmentos, lasers, existe_coracao, coracoes, existe_robocin, robocins, largura, altura)
 
 
                     if len(lasers) <= 2:
-                        y_lasers = random.randint(50, altura - 50)
-                        listinha_de_intervalos = []
-
-                        if(fragmentos):
-                            ultimo_frag = fragmentos[-1].bottomright
-
-                            if ultimo_frag[0]>largura-30:
-                                for i in range(ultimo_frag[1]-43-100,ultimo_frag[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if (len(fragmentos)>5):
-                            ultimo_frag2 = fragmentos[-6].bottomright
-
-                            if ultimo_frag2[0]>largura-30:
-                                for i in range(ultimo_frag2[1]-43-100,ultimo_frag2[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if (len(fragmentos)>10):
-                            ultimo_frag3 = fragmentos[-11].bottomright
-
-                            if ultimo_frag3[0]>largura-30:
-                                for i in range(ultimo_frag3[1]-43-100,ultimo_frag3[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if(lasers):
-                            ultimo_laser = lasers[-1].bottomright
-
-                            if ultimo_laser[0]>largura-10:
-                                for i in range(ultimo_laser[1]-103-100,ultimo_laser[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if(len(lasers)>1):
-                            penultimo_laser = lasers[-2].bottomright
-
-                            if penultimo_laser[0]>largura-10:
-                                for i in range(penultimo_laser[1]-103-100,penultimo_laser[1]+3):
-                                    listinha_de_intervalos.append(i)
-                                    
-                        if(existe_coracao):
-                            if coracoes != []:
-                                ultimo_coracao = coracoes[0].bottomright
-
-                                if ultimo_coracao[0]>largura-10:
-                                    for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
-                                        listinha_de_intervalos.append(i)
-
-                        if (existe_robocin):
-                            if robocins != []:
-                                ultimo_robocin = robocins[0].bottomright
-
-                                if ultimo_robocin[0]>largura-10:
-                                    for i in range(ultimo_robocin[1]-43-100,ultimo_robocin[1]+3):   
-                                        listinha_de_intervalos.append(i)
-
-                        y_lasers = random.randint(50, altura - 50)
-                        while(y_lasers in listinha_de_intervalos):
-                            y_lasers = random.randint(50, altura - 50)
-
-                        for i in range(2):
-
-                            x_lasers = largura
-                            lasers.append(pygame.Rect(x_lasers, y_lasers, 150, 100))
+                        listinha_de_intervalos, lasers = atualizar_intervalos_e_adicionar_lasers(fragmentos, lasers, existe_coracao, coracoes, existe_robocin, robocins, largura, altura)
 
                     agora = pygame.time.get_ticks()
-
+                
                     if (agora - tempo) >= 5000:
-                        listinha_de_intervalos = []
 
-                        if (fragmentos):
-                            ultimo_frag = fragmentos[-1].bottomright
-
-                            if ultimo_frag[0]>largura-30:
-                                for i in range(ultimo_frag[1]-43-100,ultimo_frag[1]+3):
-                                    listinha_de_intervalos.append(i)
-                        if (len(fragmentos)>5):
-                            ultimo_frag2 = fragmentos[-6].bottomright
-
-                            if ultimo_frag2[0]>largura-30:
-                                for i in range(ultimo_frag2[1]-43-100,ultimo_frag2[1]+3):
-                                    listinha_de_intervalos.append(i)
-                        if (len(fragmentos)>10):
-                            ultimo_frag3 = fragmentos[-11].bottomright
-
-                            if ultimo_frag3[0]>largura-30:
-                                for i in range(ultimo_frag3[1]-43-100,ultimo_frag3[1]+3):
-                                    listinha_de_intervalos.append(i)
-                        if (lasers):
-                            ultimo_laser = lasers[-1].bottomright
-
-                            if ultimo_laser[0]>largura-10:
-                                for i in range(ultimo_laser[1]-103-100,ultimo_laser[1]+3):
-                                    listinha_de_intervalos.append(i)
-                        if (len(lasers)>1):
-                            penultimo_laser = lasers[-2].bottomright
-
-                            if penultimo_laser[0]>largura-10:
-                                for i in range(penultimo_laser[1]-103-100,penultimo_laser[1]+3):
-                                    listinha_de_intervalos.append(i)
-
-                        if (existe_robocin):
-                            if robocins != []:
-                                ultimo_robocin = robocins[0].bottomright
-
-                                if ultimo_robocin[0]>largura-10:
-                                    for i in range(ultimo_robocin[1]-43-100,ultimo_robocin[1]+3):   
-                                        listinha_de_intervalos.append(i)
-
-                        existe_coracao = True   
-                        tempo = pygame.time.get_ticks()
-
-                        y_coracao = random.randint(50, altura - 50)
-                        x_coracao = largura
-
-                        while y_coracao in listinha_de_intervalos:
-                            y_coracao = random.randint(50, altura - 50)
-
-                        if len(coracoes) > 0:
-                            coracoes.clear()
-                        
-                        coracoes.append(pygame.Rect(x_coracao, y_coracao, 40, 40))
-
-                    if (agora - tempo_rob) >= 20000:
+                        listinha_de_intervalos, existe_coracao, tempo, coracoes = atualizar_intervalos_e_adicionar_coracao(fragmentos, lasers, existe_robocin, robocins, coracoes, largura, altura)
+                    
+                    # Criação do robocin
+                    if (agora - tempo_rob) >= 10000:
                         existe_robocin = True
                         tempo_rob = pygame.time.get_ticks()
 
                         if primeiro_robocin == False:
-                            listinha_de_intervalos = []
 
-                            if(fragmentos):
-                                ultimo_frag = fragmentos[-1].bottomright
-
-                                if ultimo_frag[0]>largura-30:
-                                    for i in range(ultimo_frag[1]-43-100,ultimo_frag[1]+3):
-                                        listinha_de_intervalos.append(i)
-                            if (len(fragmentos)>5):
-                                ultimo_frag2 = fragmentos[-6].bottomright
-
-                                if ultimo_frag2[0]>largura-30:
-                                    for i in range(ultimo_frag2[1]-43-100,ultimo_frag2[1]+3):
-                                        listinha_de_intervalos.append(i)
-                            if (len(fragmentos)>10):
-                                ultimo_frag3 = fragmentos[-11].bottomright
-
-                                if ultimo_frag3[0]>largura-30:
-                                    for i in range(ultimo_frag3[1]-43-100,ultimo_frag3[1]+3):
-                                        listinha_de_intervalos.append(i)
-                            if(lasers):
-                                ultimo_laser = lasers[-1].bottomright
-
-                                if ultimo_laser[0]>largura-10:
-                                    for i in range(ultimo_laser[1]-103-100,ultimo_laser[1]+3):
-                                        listinha_de_intervalos.append(i)
-
-                            if(len(lasers)>1):
-                                penultimo_laser = lasers[-2].bottomright
- 
-                                if penultimo_laser[0]>largura-10:
-                                    for i in range(penultimo_laser[1]-103-100,penultimo_laser[1]+3):
-                                        listinha_de_intervalos.append(i)
-
-                            if(existe_coracao):
-                                if coracoes != []:
-                                    ultimo_coracao = coracoes[0].bottomright
-
-                                    if ultimo_coracao[0]>largura-10:
-                                        for i in range(ultimo_coracao[1]-43-100,ultimo_coracao[1]+3):   
-                                            listinha_de_intervalos.append(i)
-
-                            y_robocin = random.randint(50, altura - 50)
-                            x_robocin = largura
-
-                            while y_robocin in listinha_de_intervalos:
-                                y_robocin = random.randint(50, altura - 50)
-
-                            robocins.append(pygame.Rect(x_robocin, y_robocin, 40, 40))
+                            listinha_de_intervalos, robocins = atualizar_intervalos_e_adicionar_robocin(fragmentos, lasers, existe_coracao, coracoes, largura, altura, robocins)
 
                         primeiro_robocin = False
                 
+                # Tempo de duração até a invincibilidade do robocin (bool infinito) acabar
                 if (agora - tempo_robocin) >= 6000:
                     infinito = False
 
