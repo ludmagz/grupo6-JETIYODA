@@ -303,7 +303,7 @@ def game_loop():
                         espaco = True
 
                     # Reinicia as variáveis e volta ao jogo
-                    elif evento.key == pygame.K_r and game_over and ganhou == False:
+                    elif (evento.key == pygame.K_r or evento.key == pygame.K_s) and game_over and ganhou == False:
                         pygame.mixer.music.set_volume(0.8)
                         pygame.mixer.music.play(-1)
                         tempo_inicial = pygame.time.get_ticks()
